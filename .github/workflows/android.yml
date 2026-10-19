@@ -27,6 +27,7 @@ jobs:
         run: |
           mkdir -p artifacts
           cp android/app/build/outputs/apk/debug/app-debug.apk artifacts/africa-atona.apk
+          cp web/assets/*.png artifacts/
           cd artifacts
           sha256sum africa-atona.apk > africa-atona.apk.sha256
       - uses: actions/upload-artifact@v4

@@ -9,24 +9,29 @@ import android.os.Bundle;
 import android.webkit.*;
 import android.widget.Toast;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.graphics.Color;
 public class MainActivity extends Activity {
  private WebView web;
+ private ImageView splash;
  private GeolocationPermissions.Callback pending;
  private String pendingOrigin;
  private final String home="https://africaatona.africandroid.world/";
  private boolean trusted(Uri u){return "https".equals(u.getScheme())&&"africaatona.africandroid.world".equals(u.getHost())&&(u.getPort()==-1||u.getPort()==443);}
  @Override public void onCreate(Bundle b){
-  super.onCreate(b);web=new WebView(this);setContentView(web);
+  super.onCreate(b);FrameLayout frame=new FrameLayout(this);web=new WebView(this);frame.addView(web,new FrameLayout.LayoutParams(-1,-1));splash=new ImageView(this);splash.setImageResource(R.drawable.atona_splash);splash.setScaleType(ImageView.ScaleType.FIT_CENTER);splash.setBackgroundColor(Color.rgb(0,55,38));splash.setContentDescription("AFRICA ATONA — Find your way, together.");frame.addView(splash,new FrameLayout.LayoutParams(-1,-1));setContentView(frame);
   web.getSettings().setJavaScriptEnabled(true);web.getSettings().setDomStorageEnabled(true);
   web.getSettings().setGeolocationEnabled(true);web.getSettings().setAllowFileAccess(false);
   web.getSettings().setAllowContentAccess(false);web.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
   web.setWebViewClient(new WebViewClient(){
+   @Override public void onPageFinished(WebView v,String url){splash.setVisibility(android.view.View.GONE);}
    @Override public boolean shouldOverrideUrlLoading(WebView v,WebResourceRequest r){
     Uri u=r.getUrl();if(trusted(u))return false;
     if(r.isForMainFrame()&&("https".equals(u.getScheme())||"mailto".equals(u.getScheme())))try{startActivity(new Intent(Intent.ACTION_VIEW,u));}catch(Exception e){Toast.makeText(MainActivity.this,"No app can open this link",Toast.LENGTH_LONG).show();}
     return true;
    }
-   @Override public void onReceivedError(WebView v,WebResourceRequest r,WebResourceError e){if(r.isForMainFrame())new AlertDialog.Builder(MainActivity.this).setTitle("Unable to connect").setMessage("Check your connection. AFRICA ATONA requires its hosted service.").setPositiveButton("Retry",(d,w)->web.loadUrl(home)).setNegativeButton("Close",null).show();}
+   @Override public void onReceivedError(WebView v,WebResourceRequest r,WebResourceError e){if(r.isForMainFrame()){splash.setVisibility(android.view.View.GONE);}if(r.isForMainFrame())new AlertDialog.Builder(MainActivity.this).setTitle("Unable to connect").setMessage("Check your connection. AFRICA ATONA requires its hosted service.").setPositiveButton("Retry",(d,w)->web.loadUrl(home)).setNegativeButton("Close",null).show();}
   });
   web.setWebChromeClient(new WebChromeClient(){
    @Override public boolean onJsAlert(WebView v,String url,String message,JsResult result){
