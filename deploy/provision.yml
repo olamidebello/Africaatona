@@ -1,0 +1,198 @@
+---
+- name: Provision AFRICA ATONA on Olamidepanel Debian hosting
+  hosts: all
+  become: true
+  vars:
+    domain: africaatona.africandroid.world
+    app_root: /opt/africaatona
+    port: 8097
+    dns_ipv4: 181.214.149.146
+    tls_email: dobcalldemo@gmail.com
+    provision_namecheap: true
+    routing_url: "{{ lookup('env', 'ATONA_ROUTING_URL') }}"
+    geocoder_url: "{{ lookup('env', 'ATONA_GEOCODER_URL') }}"
+    apk_repository: Africaatona
+    apk_tag: "{{ lookup('env', 'ATONA_APK_TAG') }}"
+  tasks:
+    - name: Validate fixed installation and upstream settings
+      ansible.builtin.assert:
+        that:
+          - app_root == '/opt/africaatona'
+          - domain == 'africaatona.africandroid.world'
+          - port | int == 8097
+          - routing_url is match('^https://[^\s"\x27]+$')
+          - geocoder_url is match('^https://[^\s"\x27]+$')
+        fail_msg: Set ATONA_ROUTING_URL and ATONA_GEOCODER_URL to your authorized production provider base URLs before deployment.
+    - name: Require existing Olamidepanel
+      ansible.builtin.getent:
+        database: group
+        key: olamidepanel
+    - name: Install runtime and TLS dependencies
+      ansible.builtin.apt:
+        name: [python3, nginx, certbot, python3-certbot-nginx, ca-certificates]
+        update_cache: true
+        state: present
+    - name: Create service user
+      ansible.builtin.user:
+        name: africaatona
+        system: true
+        create_home: false
+        shell: /usr/sbin/nologin
+    - name: Create application directory
+      ansible.builtin.file:
+        path: '{{ app_root }}'
+        state: directory
+        mode: '0755'
+    - name: Install application files without runtime or credentials
+      ansible.builtin.copy:
+        src: '{{ item.src }}'
+        dest: '{{ app_root }}/{{ item.dest }}'
+        owner: root
+        group: root
+        mode: '0755'
+      loop:
+        - {src: '../server.py', dest: server.py}
+        - {src: '../web/', dest: 'web/'}
+        - {src: './', dest: 'deploy/'}
+    - name: Install protected runtime configuration
+      ansible.builtin.copy:
+        dest: /etc/africaatona.env
+        owner: root
+        group: root
+        mode: '0600'
+        content: |
+          PORT={{ port }}
+          PUBLIC_URL=https://{{ domain }}
+          ATONA_DATA=/var/lib/africaatona
+          ROUTING_URL={{ routing_url }}
+          GEOCODER_URL={{ geocoder_url }}
+      no_log: true
+    - name: Configure dedicated service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/africaatona.service
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=AFRICA ATONA navigation platform
+          After=network-online.target
+          [Service]
+          User=africaatona
+          Group=africaatona
+          WorkingDirectory={{ app_root }}
+          ExecStart=/usr/bin/python3 {{ app_root }}/server.py
+          EnvironmentFile=/etc/africaatona.env
+          StateDirectory=africaatona
+          StateDirectoryMode=0700
+          Restart=on-failure
+          NoNewPrivileges=true
+          PrivateTmp=true
+          ProtectSystem=strict
+          ProtectHome=true
+          [Install]
+          WantedBy=multi-user.target
+    - name: Start application
+      ansible.builtin.systemd:
+        name: africaatona
+        state: restarted
+        enabled: true
+        daemon_reload: true
+    - name: Verify backend
+      ansible.builtin.uri:
+        url: 'http://127.0.0.1:{{ port }}/api/health'
+        status_code: 200
+      register: backend
+      retries: 5
+      delay: 2
+      until: backend.status == 200
+    - name: Merge Namecheap DNS preserving existing zone
+      ansible.builtin.command:
+        argv: [python3, '{{ app_root }}/deploy/namecheap.py']
+        stdin: "{{ {'ApiUser': lookup('env','NAMECHEAP_API_USER'), 'ApiKey': lookup('env','NAMECHEAP_API_KEY'), 'UserName': lookup('env','NAMECHEAP_USERNAME') or lookup('env','NAMECHEAP_API_USER'), 'ClientIp': lookup('env','NAMECHEAP_CLIENT_IP'), 'names': ['africaatona'], 'address': dns_ipv4} | to_json }}"
+      no_log: true
+      when: provision_namecheap | bool
+    - name: Wait until DNS resolves only to the hosting server
+      ansible.builtin.command:
+        argv: [python3, -c, 'import socket,sys; assert {r[4][0] for r in socket.getaddrinfo(sys.argv[1],443)} == {sys.argv[2]}', '{{ domain }}', '{{ dns_ipv4 }}']
+      register: dns
+      retries: 30
+      delay: 10
+      until: dns.rc == 0
+      changed_when: false
+    - name: Inspect existing certificate to preserve HTTPS
+      ansible.builtin.stat:
+        path: '/etc/letsencrypt/live/{{ domain }}/fullchain.pem'
+      register: cert
+    - name: Configure nginx
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: '/etc/nginx/sites-available/{{ domain }}'
+        mode: '0644'
+        backup: true
+    - name: Enable nginx domain
+      ansible.builtin.file:
+        src: '/etc/nginx/sites-available/{{ domain }}'
+        dest: '/etc/nginx/sites-enabled/{{ domain }}'
+        state: link
+    - name: Validate nginx
+      ansible.builtin.command: nginx -t
+      changed_when: false
+    - name: Reload nginx
+      ansible.builtin.systemd:
+        name: nginx
+        state: reloaded
+        enabled: true
+    - name: Obtain trusted certificate
+      ansible.builtin.command:
+        argv: [certbot, --nginx, --non-interactive, --agree-tos, --redirect, --keep-until-expiring, --email, '{{ tls_email }}', -d, '{{ domain }}']
+    - name: Enable TLS renewal
+      ansible.builtin.systemd:
+        name: certbot.timer
+        state: started
+        enabled: true
+    - name: Install versioned checksum verified APK when selected
+      ansible.builtin.command:
+        argv: [python3, '{{ app_root }}/deploy/install_apk.py', '{{ apk_repository }}', '{{ apk_tag }}', '{{ app_root }}/web/downloads']
+      when: apk_tag | length > 0
+    - name: Install daily maintenance service
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/africaatona-maintenance.service
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=Clean expired AFRICA ATONA records and back up database
+          [Service]
+          Type=oneshot
+          User=africaatona
+          ExecStart=/usr/bin/python3 {{ app_root }}/deploy/maintenance.py
+          UMask=0077
+    - name: Install daily maintenance timer
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/africaatona-maintenance.timer
+        mode: '0644'
+        content: |
+          [Unit]
+          Description=Daily AFRICA ATONA maintenance
+          [Timer]
+          OnCalendar=daily
+          Persistent=true
+          [Install]
+          WantedBy=timers.target
+    - name: Enable maintenance
+      ansible.builtin.systemd:
+        name: africaatona-maintenance.timer
+        state: started
+        enabled: true
+        daemon_reload: true
+    - name: Verify trusted public HTTPS
+      ansible.builtin.uri:
+        url: 'https://{{ domain }}/api/health'
+        status_code: 200
+        validate_certs: true
+    - name: Write verified hosting status
+      ansible.builtin.copy:
+        dest: '{{ app_root }}/hosting-status.json'
+        mode: '0640'
+        content: "{{ {'domain': domain, 'status': 'https_ready', 'deployment_status': 'https_ready', 'document_root': app_root, 'configuration': '/etc/nginx/sites-available/' + domain, 'backend': 'http://127.0.0.1:' + (port|string), 'repo': 'olamidebello/Africaatona', 'checked_at': now(utc=true).strftime('%Y-%m-%dT%H:%M:%SZ')} | to_nice_json }}"
+    - name: Register in Olamidepanel Hosting Domains GUI
+      ansible.builtin.command:
+        argv: [python3, '{{ app_root }}/deploy/panel_status.py', '{{ app_root }}/hosting-status.json']

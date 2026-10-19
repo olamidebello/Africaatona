@@ -1,0 +1,10 @@
+data/
+__pycache__/
+*.pyc
+.env
+*.keystore
+*.jks
+android/.gradle/
+android/**/build/
+android/local.properties
+web/downloads/

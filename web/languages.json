@@ -1,0 +1,4410 @@
+[
+  {
+    "id": "ar",
+    "name": "Arabic",
+    "region": "North Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "en",
+    "name": "English",
+    "region": "East Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "fr",
+    "name": "French",
+    "region": "East Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "ha",
+    "name": "Hausa",
+    "region": "West Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "pt",
+    "name": "Portuguese",
+    "region": "West Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "sw",
+    "name": "Swahili",
+    "region": "Central Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "yo",
+    "name": "Yoruba",
+    "region": "West Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-408",
+    "name": "!Xóõ / Taa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-273",
+    "name": "Aari",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-145",
+    "name": "Abidji",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-326",
+    "name": "Acholi",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-500",
+    "name": "Adamawa Fulfulde",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-551",
+    "name": "Adamorobe Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-262",
+    "name": "Afar",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-368",
+    "name": "Afrikaans",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-160",
+    "name": "Aja",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-76",
+    "name": "Akan",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-170",
+    "name": "Akebu",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-474",
+    "name": "Akoko varieties",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-171",
+    "name": "Akposso",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-496",
+    "name": "Akuapem Twi",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-5",
+    "name": "Algerian Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-547",
+    "name": "Algerian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-252",
+    "name": "Alur",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-258",
+    "name": "Amharic",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-40",
+    "name": "Anaang",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-26",
+    "name": "Andaandi / Dongolawi",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-256",
+    "name": "Angolar",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-220",
+    "name": "Annobonese / Fa d’Ambô",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-452",
+    "name": "Antandroy",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-453",
+    "name": "Antanosy",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-280",
+    "name": "Anuak",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-138",
+    "name": "Anyin",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-360",
+    "name": "Anywa / Anuak",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-486",
+    "name": "Arochukwu",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-495",
+    "name": "Asante Twi",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-324",
+    "name": "Ateso",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-144",
+    "name": "Attié",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-70",
+    "name": "Atyap",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-146",
+    "name": "Avikam",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-485",
+    "name": "Awka",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-277",
+    "name": "Awngi",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-65",
+    "name": "Bachama",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-111",
+    "name": "Baga languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-72",
+    "name": "Bajju",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-198",
+    "name": "Bakweri / Mokpwe",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-364",
+    "name": "Balanda languages",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-96",
+    "name": "Balanta",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-99",
+    "name": "Bambara / Bamanankan",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-193",
+    "name": "Bamun",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-208",
+    "name": "Banda languages",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-136",
+    "name": "Baoulé",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-455",
+    "name": "Bara",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-355",
+    "name": "Bari",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-157",
+    "name": "Bariba / Baatonum",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-184",
+    "name": "Basaa",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-126",
+    "name": "Bassa",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-172",
+    "name": "Bassar / Ntcham",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-494",
+    "name": "Bausanci",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-28",
+    "name": "Beja",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-410",
+    "name": "Bemba",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-349",
+    "name": "Bena",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-514",
+    "name": "Benadiri",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-292",
+    "name": "Benadiri varieties",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-272",
+    "name": "Bench",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-488",
+    "name": "Bende",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-218",
+    "name": "Benga",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-59",
+    "name": "Berom",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-283",
+    "name": "Berta",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-450",
+    "name": "Betsileo",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-449",
+    "name": "Betsimisaraka",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-464",
+    "name": "Bhojpuri",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-117",
+    "name": "Bijago",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-286",
+    "name": "Bilen",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-149",
+    "name": "Bissa",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-532",
+    "name": "Boa Vista Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-67",
+    "name": "Bole",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-104",
+    "name": "Bomu",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-508",
+    "name": "Borana",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-307",
+    "name": "Borana Oromo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-363",
+    "name": "Boya",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-103",
+    "name": "Bozo languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-528",
+    "name": "Brava Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-216",
+    "name": "Bube",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-176",
+    "name": "Buduma",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-89",
+    "name": "Buli",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-182",
+    "name": "Bulu",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-63",
+    "name": "Bura",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-315",
+    "name": "Burji",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-152",
+    "name": "Bwamu",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-139",
+    "name": "Bété languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-199",
+    "name": "Cameroon Pidgin English",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-179",
+    "name": "Cape Verdean Creole / Kriolu",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-13",
+    "name": "Central Atlas Tamazight",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-10",
+    "name": "Chadian Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-334",
+    "name": "Chaga languages",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-432",
+    "name": "Changana",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-15",
+    "name": "Chaoui",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-17",
+    "name": "Chenoua",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-385",
+    "name": "Chewa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-388",
+    "name": "Chibarwe",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-424",
+    "name": "Chichewa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-293",
+    "name": "Chimwiini",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-250",
+    "name": "Chokwe",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-434",
+    "name": "Chopi",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-435",
+    "name": "Chuwabo",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-32",
+    "name": "Coptic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-81",
+    "name": "Dagaare",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-150",
+    "name": "Dagara",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-80",
+    "name": "Dagbani",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-289",
+    "name": "Dahalik",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-129",
+    "name": "Dan",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-79",
+    "name": "Dangme",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-342",
+    "name": "Datooga",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-493",
+    "name": "Dauranci",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-271",
+    "name": "Dawro",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-175",
+    "name": "Dazaga",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-134",
+    "name": "Dei",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-158",
+    "name": "Dendi",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-298",
+    "name": "Dholuo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-142",
+    "name": "Dida languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-362",
+    "name": "Didinga",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-354",
+    "name": "Dinka",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-161",
+    "name": "Ditammari",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-102",
+    "name": "Dogon languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-183",
+    "name": "Duala",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-137",
+    "name": "Dyula / Jula",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-511",
+    "name": "Eastern Oromo",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-55",
+    "name": "Ebira",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-43",
+    "name": "Edo",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-39",
+    "name": "Efik",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-470",
+    "name": "Egba",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-69",
+    "name": "Eggon",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-3",
+    "name": "Egyptian Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-550",
+    "name": "Egyptian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-472",
+    "name": "Ekiti",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-314",
+    "name": "El Molo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-303",
+    "name": "Embu",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-44",
+    "name": "Esan",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-542",
+    "name": "Ethiopian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-77",
+    "name": "Ewe",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-181",
+    "name": "Ewondo",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-215",
+    "name": "Fang",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-497",
+    "name": "Fante",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-186",
+    "name": "Fe’fe’",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-350",
+    "name": "Fipa",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-526",
+    "name": "Fogo Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-156",
+    "name": "Fon",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-255",
+    "name": "Forro",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-82",
+    "name": "Frafra / Farefare",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-114",
+    "name": "Fula",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-36",
+    "name": "Fulfulde",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-29",
+    "name": "Fur",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-78",
+    "name": "Ga",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-309",
+    "name": "Gabbra",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-265",
+    "name": "Gamo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-56",
+    "name": "Gbagyi",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-132",
+    "name": "Gbandi",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-197",
+    "name": "Gbaya",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-207",
+    "name": "Gbaya languages",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-267",
+    "name": "Gedeo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-409",
+    "name": "German",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-20",
+    "name": "Ghadamès",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-534",
+    "name": "Ghanaian Pidgin English",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-540",
+    "name": "Ghanaian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-185",
+    "name": "Ghomálá’",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-60",
+    "name": "Goemai",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-266",
+    "name": "Gofa",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-337",
+    "name": "Gogo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-133",
+    "name": "Gola",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-83",
+    "name": "Gonja",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-127",
+    "name": "Grebo languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-113",
+    "name": "Guinea-Bissau Kriol",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-509",
+    "name": "Guji",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-151",
+    "name": "Gulmancema",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-282",
+    "name": "Gumuz",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-159",
+    "name": "Gun",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-276",
+    "name": "Gurage languages",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-141",
+    "name": "Guro",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-398",
+    "name": "Gǀui",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-399",
+    "name": "Gǁana",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-268",
+    "name": "Hadiyya",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-343",
+    "name": "Hadza",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-274",
+    "name": "Harari",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-8",
+    "name": "Hassaniya",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-335",
+    "name": "Haya",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-336",
+    "name": "Hehe",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-253",
+    "name": "Hema",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-394",
+    "name": "Herero",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-243",
+    "name": "Hunde",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-468",
+    "name": "Ibadan",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-38",
+    "name": "Ibibio",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-53",
+    "name": "Idoma",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-169",
+    "name": "Ifè",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-52",
+    "name": "Igala",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-35",
+    "name": "Igbo",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-478",
+    "name": "Igbomina",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-54",
+    "name": "Igede",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-469",
+    "name": "Ijebu",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-471",
+    "name": "Ijesha",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-476",
+    "name": "Ikale",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-73",
+    "name": "Ikwerre",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-418",
+    "name": "Ila",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-477",
+    "name": "Ilaje",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-341",
+    "name": "Iraqw",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-46",
+    "name": "Isoko",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-51",
+    "name": "Itsekiri",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-47",
+    "name": "Izon",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-94",
+    "name": "Jola languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-365",
+    "name": "Juba Arabic",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-57",
+    "name": "Jukun",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-148",
+    "name": "Jula",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-397",
+    "name": "Juǀ’hoan",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-164",
+    "name": "Kabiyè",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-14",
+    "name": "Kabyle",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-270",
+    "name": "Kafa",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-330",
+    "name": "Kakwa",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-48",
+    "name": "Kalabari",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-380",
+    "name": "Kalanga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-300",
+    "name": "Kalenjin languages",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-301",
+    "name": "Kamba",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-269",
+    "name": "Kambaata",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-489",
+    "name": "Kananci",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-202",
+    "name": "Kanembu",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-37",
+    "name": "Kanuri",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-415",
+    "name": "Kaonde",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-325",
+    "name": "Karamojong",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-516",
+    "name": "Karanga",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-214",
+    "name": "Kare",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-85",
+    "name": "Kasem",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-491",
+    "name": "Katsinanci",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-537",
+    "name": "Kenyan Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-25",
+    "name": "Kenzi / Mattokki",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-403",
+    "name": "Khoekhoegowab",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-503",
+    "name": "Kiamu",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-294",
+    "name": "Kibajuni",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-462",
+    "name": "Kibushi",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-441",
+    "name": "Kikongo",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-297",
+    "name": "Kikuyu / Gikuyu",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-66",
+    "name": "Kilba",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-440",
+    "name": "Kimbundu",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-506",
+    "name": "Kimrima",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-502",
+    "name": "Kimvita",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-507",
+    "name": "Kingwana",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-352",
+    "name": "Kinyarwanda",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-504",
+    "name": "Kipemba",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-353",
+    "name": "Kirundi",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-108",
+    "name": "Kissi",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-230",
+    "name": "Kituba",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-505",
+    "name": "Kitumbatu",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-501",
+    "name": "Kiunguja",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-128",
+    "name": "Klao / Kru",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-390",
+    "name": "Koisan varieties",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-190",
+    "name": "Kom",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-217",
+    "name": "Kombe",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-232",
+    "name": "Kongo varieties",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-88",
+    "name": "Konkomba",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-122",
+    "name": "Kono",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-112",
+    "name": "Konyanka",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-517",
+    "name": "Korekore",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-227",
+    "name": "Kota",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-109",
+    "name": "Kpelle",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-118",
+    "name": "Krio",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-287",
+    "name": "Kunama",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-331",
+    "name": "Kupsabiny",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-123",
+    "name": "Kuranko",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-84",
+    "name": "Kusaal",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-58",
+    "name": "Kuteb",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-442",
+    "name": "Kwanyama",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-219",
+    "name": "Kwasio",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-417",
+    "name": "Lamba",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-428",
+    "name": "Lambya",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-191",
+    "name": "Lamnso’",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-327",
+    "name": "Lango",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-242",
+    "name": "Lega",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-254",
+    "name": "Lendu",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-416",
+    "name": "Lenje",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-135",
+    "name": "Liberian Kreyol",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-7",
+    "name": "Libyan Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-121",
+    "name": "Limba",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-192",
+    "name": "Limbum",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-231",
+    "name": "Lingala",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-124",
+    "name": "Loko",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-131",
+    "name": "Loma",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-425",
+    "name": "Lomwe",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-359",
+    "name": "Lotuko / Otuho",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-412",
+    "name": "Lozi",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-245",
+    "name": "Luba-Katanga",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-316",
+    "name": "Luganda",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-328",
+    "name": "Lugbara",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-322",
+    "name": "Lugwere",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-299",
+    "name": "Luhya languages",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-323",
+    "name": "Lumasaba",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-413",
+    "name": "Lunda",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-321",
+    "name": "Lusoga",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-414",
+    "name": "Luvale",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-153",
+    "name": "Lyélé",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-304",
+    "name": "Maasai",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-498",
+    "name": "Maasina Fulfulde",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-291",
+    "name": "Maay",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-203",
+    "name": "Maba",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-329",
+    "name": "Madi",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-194",
+    "name": "Mafa",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-456",
+    "name": "Mahafaly",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-527",
+    "name": "Maio Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-281",
+    "name": "Majang",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-430",
+    "name": "Makhuwa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-338",
+    "name": "Makonde",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-447",
+    "name": "Malagasy",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-419",
+    "name": "Mambwe",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-116",
+    "name": "Mancanha",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-93",
+    "name": "Mandinka",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-100",
+    "name": "Maninka",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-97",
+    "name": "Manjak",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-130",
+    "name": "Mano",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-437",
+    "name": "Manyika",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-209",
+    "name": "Manza",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-64",
+    "name": "Margi",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-31",
+    "name": "Masalit",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-205",
+    "name": "Massa",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-463",
+    "name": "Mauritian Creole",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-482",
+    "name": "Mbaise",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-233",
+    "name": "Mbochi",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-234",
+    "name": "Mbosi-related varieties",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-445",
+    "name": "Mbunda",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-187",
+    "name": "Medumba",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-119",
+    "name": "Mende",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-448",
+    "name": "Merina",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-302",
+    "name": "Meru",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-27",
+    "name": "Midob",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-313",
+    "name": "Mijikenda languages",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-165",
+    "name": "Mina / Gen",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-167",
+    "name": "Moba",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-2",
+    "name": "Modern Standard Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-238",
+    "name": "Mongo",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-147",
+    "name": "Mooré",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-4",
+    "name": "Moroccan Darija",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-549",
+    "name": "Moroccan Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-195",
+    "name": "Mundang",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-361",
+    "name": "Mundari",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-357",
+    "name": "Murle",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-295",
+    "name": "Mushunguli",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-62",
+    "name": "Mwaghavul",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-223",
+    "name": "Myene",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-18",
+    "name": "Nafusi",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-381",
+    "name": "Nambya",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-544",
+    "name": "Namibian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-420",
+    "name": "Namwanga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-240",
+    "name": "Nande",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-288",
+    "name": "Nara",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-395",
+    "name": "Naro",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-168",
+    "name": "Nawdm",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-389",
+    "name": "Ndau",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-379",
+    "name": "Ndebele",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-50",
+    "name": "Nembe",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-201",
+    "name": "Ngambay",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-61",
+    "name": "Ngas",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-210",
+    "name": "Ngbaka",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-251",
+    "name": "Ngbandi",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-189",
+    "name": "Ngiemboon",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-351",
+    "name": "Ngoni",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-481",
+    "name": "Ngwa",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-499",
+    "name": "Nigerian Fulfulde",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-75",
+    "name": "Nigerian Pidgin",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-541",
+    "name": "Nigerian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-444",
+    "name": "Nkhumbi",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-422",
+    "name": "Nkoya",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-24",
+    "name": "Nobiin",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-98",
+    "name": "Noon",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-513",
+    "name": "Northern Somali",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-483",
+    "name": "Nsukka",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-535",
+    "name": "Nubi",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-279",
+    "name": "Nuer",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-154",
+    "name": "Nuni",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-42",
+    "name": "Nupe",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-339",
+    "name": "Nyakyusa",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-427",
+    "name": "Nyakyusa-Ngonde",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-333",
+    "name": "Nyamwezi",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-443",
+    "name": "Nyaneka",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-244",
+    "name": "Nyanga",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-411",
+    "name": "Nyanja / Chewa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-429",
+    "name": "Nyiha",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-436",
+    "name": "Nyungwe",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-212",
+    "name": "Nzakara",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-225",
+    "name": "Nzebi",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-86",
+    "name": "Nzema",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-377",
+    "name": "Nǀuu",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-74",
+    "name": "Ogoni languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-487",
+    "name": "Ohuhu",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-49",
+    "name": "Okrika",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-473",
+    "name": "Ondo",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-479",
+    "name": "Onitsha",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-484",
+    "name": "Orlu",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-512",
+    "name": "Orma",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-259",
+    "name": "Oromo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-400",
+    "name": "Oshikwanyama",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-401",
+    "name": "Oshindonga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-402",
+    "name": "Oshiwambo varieties",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-404",
+    "name": "Otjiherero",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-480",
+    "name": "Owerri",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-475",
+    "name": "Owo",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-467",
+    "name": "Oyo",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-115",
+    "name": "Papel",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-347",
+    "name": "Pare",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-249",
+    "name": "Pende",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-221",
+    "name": "Pichi",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-310",
+    "name": "Pokomo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-257",
+    "name": "Principense / Lung’ie",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-91",
+    "name": "Pulaar",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-106",
+    "name": "Pular",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-224",
+    "name": "Punu",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-348",
+    "name": "Rangi",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-308",
+    "name": "Rendille",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-433",
+    "name": "Ronga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-318",
+    "name": "Rukiga",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-405",
+    "name": "Rukwangali",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-406",
+    "name": "Rumanyo",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-317",
+    "name": "Runyankore",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-319",
+    "name": "Runyoro",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-320",
+    "name": "Rutooro",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-543",
+    "name": "Rwandan Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-466",
+    "name": "Réunion Creole",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-285",
+    "name": "Saho",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-451",
+    "name": "Sakalava",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-490",
+    "name": "Sakkwatanci",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-533",
+    "name": "Sal Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-306",
+    "name": "Samburu",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-155",
+    "name": "Samo languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-344",
+    "name": "Sandawe",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-206",
+    "name": "Sango",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-525",
+    "name": "Santiago Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-530",
+    "name": "Santo Antão Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-200",
+    "name": "Sara languages",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-522",
+    "name": "Sekgatla",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-518",
+    "name": "Sekwena",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-426",
+    "name": "Sena",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-519",
+    "name": "Sengwaketse",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-520",
+    "name": "Sengwato",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-140",
+    "name": "Senufo languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-371",
+    "name": "Sepedi / Northern Sotho",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-92",
+    "name": "Serer",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-523",
+    "name": "Serolong",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-369",
+    "name": "Sesotho",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-521",
+    "name": "Setawana",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-524",
+    "name": "Setlhaping",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-370",
+    "name": "Setswana",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-465",
+    "name": "Seychellois Creole / Kreol Seselwa",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-346",
+    "name": "Shambala",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-384",
+    "name": "Shangani / Tsonga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-391",
+    "name": "Shekgalagari",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-241",
+    "name": "Shi",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-457",
+    "name": "Shikomori",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-356",
+    "name": "Shilluk",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-461",
+    "name": "Shimaore",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-460",
+    "name": "Shimwali",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-459",
+    "name": "Shindzuani",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-458",
+    "name": "Shingazidja",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-392",
+    "name": "Shiyeyi",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-378",
+    "name": "Shona",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-263",
+    "name": "Sidama",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-407",
+    "name": "Silozi",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-275",
+    "name": "Silt’e",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-87",
+    "name": "Sisaala",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-19",
+    "name": "Siwi",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-423",
+    "name": "Soli",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-261",
+    "name": "Somali",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-101",
+    "name": "Songhay languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-446",
+    "name": "Songo",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-246",
+    "name": "Songye",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-95",
+    "name": "Soninke",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-386",
+    "name": "Sotho",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-536",
+    "name": "South African Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-222",
+    "name": "Spanish",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-9",
+    "name": "Sudanese Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-248",
+    "name": "Suku",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-332",
+    "name": "Sukuma",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-107",
+    "name": "Susu",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-105",
+    "name": "Syenara",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-531",
+    "name": "São Nicolau Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-529",
+    "name": "São Vicente Creole",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-396",
+    "name": "Taa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-311",
+    "name": "Taita",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-23",
+    "name": "Tamahaq",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-22",
+    "name": "Tamajaq",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-21",
+    "name": "Tamasheq",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-68",
+    "name": "Tangale",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-539",
+    "name": "Tanzanian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-11",
+    "name": "Tarifit",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-12",
+    "name": "Tashelhit",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-177",
+    "name": "Tassawaq",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-312",
+    "name": "Taveta",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-174",
+    "name": "Teda",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-204",
+    "name": "Tedaga",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-228",
+    "name": "Teke languages",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-166",
+    "name": "Tem",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-120",
+    "name": "Temne",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-239",
+    "name": "Tetela",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-438",
+    "name": "Tewe",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-393",
+    "name": "Thimbukushu",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-284",
+    "name": "Tigre",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-260",
+    "name": "Tigrinya",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-41",
+    "name": "Tiv",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-110",
+    "name": "Toma / Loma",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-382",
+    "name": "Tonga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-358",
+    "name": "Toposa",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-237",
+    "name": "Tshiluba",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-374",
+    "name": "Tshivenda",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-454",
+    "name": "Tsimihety",
+    "region": "Indian Ocean",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-226",
+    "name": "Tsogo",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-431",
+    "name": "Tsonga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-387",
+    "name": "Tswana",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-421",
+    "name": "Tumbuka",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-16",
+    "name": "Tumzabt",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-6",
+    "name": "Tunisian Arabic",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-548",
+    "name": "Tunisian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-196",
+    "name": "Tupuri",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-305",
+    "name": "Turkana",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-71",
+    "name": "Tyap",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-538",
+    "name": "Ugandan Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-439",
+    "name": "Umbundu",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-45",
+    "name": "Urhobo",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-125",
+    "name": "Vai",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-383",
+    "name": "Venda",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-229",
+    "name": "Vili",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-162",
+    "name": "Waama",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-510",
+    "name": "West-Central Oromo",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-264",
+    "name": "Wolaytta",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-90",
+    "name": "Wolof",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-143",
+    "name": "Wè languages",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-278",
+    "name": "Xamtanga",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-376",
+    "name": "Xiri",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-247",
+    "name": "Yaka",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-213",
+    "name": "Yakoma",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-340",
+    "name": "Yao",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-188",
+    "name": "Yemba",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-163",
+    "name": "Yom",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-235",
+    "name": "Yombe",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-30",
+    "name": "Zaghawa",
+    "region": "North Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-545",
+    "name": "Zambian Sign Language",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-211",
+    "name": "Zande",
+    "region": "Central Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-345",
+    "name": "Zaramo",
+    "region": "East Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-173",
+    "name": "Zarma",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-492",
+    "name": "Zazzaganci",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-178",
+    "name": "Zenaga",
+    "region": "West Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-515",
+    "name": "Zezuru",
+    "region": "Varieties",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-546",
+    "name": "Zimbabwean sign languages",
+    "region": "Sign languages",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": true
+  },
+  {
+    "id": "preference-375",
+    "name": "isiNdebele",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-367",
+    "name": "isiXhosa",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-366",
+    "name": "isiZulu",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-372",
+    "name": "Xitsonga",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
+    "id": "preference-373",
+    "name": "siSwati",
+    "region": "Southern Africa",
+    "translation": "English fallback",
+    "voice": "device-dependent",
+    "sign": false
+  }
+]
