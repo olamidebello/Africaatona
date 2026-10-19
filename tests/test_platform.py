@@ -43,6 +43,21 @@ class PlatformTests(unittest.TestCase):
    self.assertIn('/route/v1/driving/3.0,6.0;4.0,7.0',urls[0])
    self.assertEqual(self.req('/api/route?points=3,999;4,7')[0],400)
   finally:server.upstream=original;os.environ.pop('ROUTING_URL')
+ def test_super_admin_authorization_and_revocation(self):
+  admin=self.account('operator');member=self.account('member')
+  self.assertEqual(self.req('/api/admin',cookie=member)[0],403)
+  with server.db() as c:
+   c.execute("UPDATE users SET role='super_admin' WHERE email='operator@example.com'")
+   uid=c.execute("SELECT id FROM users WHERE email='member@example.com'").fetchone()[0]
+   own=c.execute("SELECT id FROM users WHERE email='operator@example.com'").fetchone()[0]
+  result=self.req('/api/admin',cookie=admin);self.assertEqual(result[0],200)
+  self.assertNotIn('password',result[2]['users'][0])
+  self.assertEqual(self.req('/api/admin',{'id':uid,'action':'disable'},member)[0],403)
+  self.assertEqual(self.req('/api/admin',{'id':own,'action':'disable'},admin)[0],400)
+  self.assertEqual(self.req('/api/admin',{'id':uid,'action':'disable'},admin)[0],200)
+  self.assertIsNone(self.req('/api/me',cookie=member)[2]['user'])
+  self.assertEqual(self.req('/api/login',{'email':'member@example.com','password':'strong-password-123'})[0],401)
+  self.assertEqual(len(self.req('/api/admin',cookie=admin)[2]['audit']),1)
  def test_account_deletion(self):
   a=self.account('delete');self.req('/api/trips',{'label':'Trip','lat':6,'lon':3,'arrival':'2026-12-01T10:00:00Z'},a)
   self.assertEqual(self.req('/api/delete-account',{},a)[0],200)

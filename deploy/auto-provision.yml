@@ -1,0 +1,45 @@
+---
+- name: Provision private routing and geocoding when no external endpoints supplied
+  hosts: all
+  become: true
+  tasks:
+    - name: Require a complete external provider pair or automatic local providers
+      ansible.builtin.assert:
+        that:
+          - (lookup('env','ATONA_ROUTING_URL') == '') == (lookup('env','ATONA_GEOCODER_URL') == '')
+        fail_msg: Supply both external provider URLs or unset both for automatic self-hosting.
+    - name: Inspect Docker availability
+      ansible.builtin.command: docker --version
+      register: docker_available
+      failed_when: false
+      changed_when: false
+      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+    - name: Install Docker only if absent
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+        update_cache: true
+      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == '' and docker_available.rc != 0
+    - name: Ensure Docker runs
+      ansible.builtin.systemd:
+        name: docker
+        enabled: true
+        state: started
+      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+    - name: Install provider provisioning worker
+      ansible.builtin.copy:
+        src: providers.py
+        dest: /usr/local/sbin/africaatona-providers
+        mode: '0700'
+      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+    - name: Import regional dataset and validate both local providers
+      ansible.builtin.command:
+        argv: [python3, /usr/local/sbin/africaatona-providers]
+      async: 28800
+      poll: 15
+      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+- import_playbook: provision.yml
+  vars:
+    routing_url: "{{ lookup('env','ATONA_ROUTING_URL') or 'http://127.0.0.1:5007' }}"
+    geocoder_url: "{{ lookup('env','ATONA_GEOCODER_URL') or 'http://127.0.0.1:8087' }}"
+    provision_namecheap: false

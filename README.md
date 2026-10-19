@@ -73,3 +73,24 @@ Once installed, the website's Get Android app control serves `/downloads/africa-
 ## Operations and privacy
 
 Runtime: `africaatona.service` on `127.0.0.1:8097`; data `/var/lib/africaatona`; protected environment `/etc/africaatona.env`. Daily `africaatona-maintenance.timer` removes expired reports/sessions and retains seven daily SQLite backups. Active reports expire from display after two hours. User data in backups can remain for seven days after account deletion. The in-app Help screen explains this privacy model. No continuous location trail is stored; submitted coordinates and provider queries leave the device. This beta needs operational monitoring, provider load testing and road testing before production navigation use.
+
+
+## Automatic private providers and super administration
+
+Run on the hosting server:
+
+```bash
+cd /opt/africaatona-source
+git pull --ff-only origin main
+ansible-playbook -i localhost, -c local deploy/auto-provision.yml
+```
+
+When neither external URL environment variable is set, this imports **Nigeria** OpenStreetMap data into private OSRM and Nominatim containers, validates route/search responses, and automatically configures `ROUTING_URL=http://127.0.0.1:5007` and `GEOCODER_URL=http://127.0.0.1:8087`. Only those exact loopback HTTP endpoints are accepted alongside the existing HTTPS provider option. The website remains public HTTPS; provider ports bind only to loopback. No API key or public demo endpoint is assumed. If using external providers instead, set both `ATONA_ROUTING_URL` and `ATONA_GEOCODER_URL` before running.
+
+This regional deployment profile requires at least **16 GB RAM and 80 GiB free disk**. The initial geocoder import can take hours. Both imports have persistent state, named PostgreSQL storage, protected database credentials, container ownership labels, and first-use resolved image digests to prevent silent upgrades. Docker is installed only if absent. Dataset changes are refused rather than replacing existing databases. This does not provide all-Africa map coverage, live traffic, automatic map refresh, or off-host geocoder backups; those need a capacity and data-maintenance deployment plan. The dataset URL is recorded in `/var/lib/africaatona-providers/dataset.json`.
+
+The automatic playbook then runs existing hosting/TLS/APK deployment with DNS changes disabled because the hostname is already configured. It still checks DNS before certificate provisioning. Existing Namecheap-enabled `deploy/provision.yml` remains available separately.
+
+Super administration is available at `/admin.html` after deployment. The backend adds role/disabled columns and an audit table without replacing accounts. It supports account enable/disable, grant/remove super-admin access, session revocation, report deletion, database resource counts and audit history. Requests require a super-admin session; mutations additionally require the configured same-origin Origin header. No password hashes are exposed. It refuses self-disable and self-demotion.
+
+The deployment explicitly promotes `ATONA_ADMIN_EMAIL` (default `dobcalldemo@gmail.com`) if that account exists, preserving its password. Otherwise it creates a random password and saves new credentials to root-only `/var/lib/africaatona-admin/credentials.json`; no password is printed by Ansible. Use your existing password for an existing account. The navigation includes an Administration link. Other domains' administrator accounts are independent.

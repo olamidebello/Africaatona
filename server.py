@@ -16,6 +16,10 @@ def db():
 def init():
  with db() as c:
   c.executescript('''CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY,email TEXT UNIQUE,name TEXT,salt TEXT,password TEXT); CREATE TABLE IF NOT EXISTS sessions(token TEXT PRIMARY KEY,user_id INTEGER,expires REAL); CREATE TABLE IF NOT EXISTS reports(id INTEGER PRIMARY KEY,user_id INTEGER,kind TEXT,lat REAL,lon REAL,note TEXT,created REAL); CREATE TABLE IF NOT EXISTS places(id INTEGER PRIMARY KEY,user_id INTEGER,label TEXT,lat REAL,lon REAL); CREATE TABLE IF NOT EXISTS trips(id INTEGER PRIMARY KEY,user_id INTEGER,label TEXT,lat REAL,lon REAL,arrival TEXT);''')
+  columns={r[1] for r in c.execute('PRAGMA table_info(users)')}
+  if 'role' not in columns:c.execute("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'")
+  if 'disabled' not in columns:c.execute('ALTER TABLE users ADD COLUMN disabled INTEGER NOT NULL DEFAULT 0')
+  c.execute('CREATE TABLE IF NOT EXISTS admin_audit(id INTEGER PRIMARY KEY,actor INTEGER,action TEXT,target INTEGER,created REAL)')
 def password(p,s): return hashlib.scrypt(p.encode(),salt=bytes.fromhex(s),n=16384,r=8,p=1).hex()
 def coord(lat,lon):
  lat,lon=float(lat),float(lon)
@@ -41,7 +45,7 @@ class Handler(BaseHTTPRequestHandler):
   cookie=SimpleCookie(); cookie.load(self.headers.get('Cookie','')); token=cookie.get('atona')
   if token:
    with db() as c:
-    row=c.execute('SELECT users.id,email,name FROM sessions JOIN users ON users.id=sessions.user_id WHERE token=? AND expires>?',(hashlib.sha256(token.value.encode()).hexdigest(),time.time())).fetchone()
+    row=c.execute('SELECT users.id,email,name,role FROM sessions JOIN users ON users.id=sessions.user_id WHERE token=? AND expires>? AND disabled=0',(hashlib.sha256(token.value.encode()).hexdigest(),time.time())).fetchone()
     if row: return dict(row)
   return None
  def do_GET(self):
@@ -50,6 +54,15 @@ class Handler(BaseHTTPRequestHandler):
   except Exception: self.send(502,{'error':'Service unavailable. Please try again.'})
  def get(self):
   p=urlparse(self.path); q=parse_qs(p.query)
+  if p.path=='/api/admin':
+   user=self.user()
+   if not user or user['role']!='super_admin':return self.send(403,{'error':'Super administrator access required'})
+   with db() as c:
+    users=[dict(r) for r in c.execute('SELECT id,email,name,role,disabled FROM users ORDER BY id DESC LIMIT 500')]
+    reports=[dict(r) for r in c.execute('SELECT id,user_id,kind,note,created FROM reports ORDER BY id DESC LIMIT 200')]
+    audit=[dict(r) for r in c.execute('SELECT * FROM admin_audit ORDER BY id DESC LIMIT 200')]
+    counts={t:c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0] for t in ('users','sessions','reports','places','trips')}
+   return self.send(200,dict(users=users,reports=reports,audit=audit,counts=counts,providers={'routing':bool(os.getenv('ROUTING_URL')),'geocoding':bool(os.getenv('GEOCODER_URL'))}))
   if p.path=='/api/health': return self.send(200,{'ok':True,'application':'AFRICA ATONA'})
   if p.path=='/api/me': return self.send(200,{'user':self.user()})
   if p.path=='/api/capabilities': return self.send(200,{'routing':bool(os.getenv('ROUTING_URL')),'search':bool(os.getenv('GEOCODER_URL')),'liveTraffic':False,'speedLimits':False,'reportKinds':KINDS,'apk':(ROOT/'web/downloads/africa-atona.apk').is_file()})
@@ -117,11 +130,27 @@ class Handler(BaseHTTPRequestHandler):
       try:c.execute('INSERT INTO users(email,name,salt,password) VALUES(?,?,?,?)',(email,str(b.get('name','Driver'))[:70],salt,password(pw,salt)))
       except sqlite3.IntegrityError:return self.send(409,{'error':'Account already exists'})
      row=c.execute('SELECT * FROM users WHERE email=?',(email,)).fetchone()
-     if not row or not hmac.compare_digest(row['password'],password(pw,row['salt'])):return self.send(401,{'error':'Email or password incorrect'})
+     if not row or row['disabled'] or not hmac.compare_digest(row['password'],password(pw,row['salt'])):return self.send(401,{'error':'Email or password incorrect'})
      token=secrets.token_urlsafe(32); c.execute('DELETE FROM sessions WHERE expires<?',(now,)); c.execute('INSERT INTO sessions VALUES(?,?,?)',(hashlib.sha256(token.encode()).hexdigest(),row['id'],now+86400*7))
     return self.send(200,{'ok':True},{'Set-Cookie':f'atona={token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=604800'})
    user=self.user()
    if not user:return self.send(401,{'error':'Sign in first'})
+   if path=='/api/admin':
+    if user['role']!='super_admin':return self.send(403,{'error':'Super administrator access required'})
+    target=int(b['id']);action=b['action']
+    with db() as c:
+     if action=='delete_report':
+      if not c.execute('SELECT 1 FROM reports WHERE id=?',(target,)).fetchone():raise ValueError()
+      c.execute('DELETE FROM reports WHERE id=?',(target,))
+     elif action in ('disable','enable','grant_admin','remove_admin','revoke_sessions'):
+      if not c.execute('SELECT 1 FROM users WHERE id=?',(target,)).fetchone():raise ValueError()
+      if target==user['id'] and action in ('disable','remove_admin'):return self.send(400,{'error':'Cannot remove your own access'})
+      if action in ('disable','enable'):c.execute('UPDATE users SET disabled=? WHERE id=?',(int(action=='disable'),target))
+      if action in ('grant_admin','remove_admin'):c.execute('UPDATE users SET role=? WHERE id=?',('super_admin' if action=='grant_admin' else 'user',target))
+      c.execute('DELETE FROM sessions WHERE user_id=?',(target,))
+     else:raise ValueError()
+     c.execute('INSERT INTO admin_audit(actor,action,target,created) VALUES(?,?,?,?)',(user['id'],action,target,time.time()))
+    return self.send(200,{'ok':True})
    if path=='/api/logout':
     from http.cookies import SimpleCookie
     cookies=SimpleCookie();cookies.load(self.headers.get('Cookie',''))
