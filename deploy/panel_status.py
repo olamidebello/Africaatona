@@ -15,7 +15,7 @@ with (root / 'weather-status.lock').open('w') as lock:
     path = root / 'hosted-domains.json'
     try:
         data = json.loads(path.read_text())
-    except (FileNotFoundError, ValueError):
+    except FileNotFoundError:
         data = {'domains': []}
     rows = {r['domain']: r for r in data['domains']}
     rows[report['domain']] = report
