@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.*;
 import android.widget.Toast;
+import android.widget.EditText;
 public class MainActivity extends Activity {
  private WebView web;
  private GeolocationPermissions.Callback pending;
@@ -28,6 +29,16 @@ public class MainActivity extends Activity {
    @Override public void onReceivedError(WebView v,WebResourceRequest r,WebResourceError e){if(r.isForMainFrame())new AlertDialog.Builder(MainActivity.this).setTitle("Unable to connect").setMessage("Check your connection. AFRICA ATONA requires its hosted service.").setPositiveButton("Retry",(d,w)->web.loadUrl(home)).setNegativeButton("Close",null).show();}
   });
   web.setWebChromeClient(new WebChromeClient(){
+   @Override public boolean onJsAlert(WebView v,String url,String message,JsResult result){
+    new AlertDialog.Builder(MainActivity.this).setMessage(message).setPositiveButton("OK",(d,w)->result.confirm()).setOnCancelListener(d->result.cancel()).show();return true;
+   }
+   @Override public boolean onJsConfirm(WebView v,String url,String message,JsResult result){
+    new AlertDialog.Builder(MainActivity.this).setMessage(message).setPositiveButton("Confirm",(d,w)->result.confirm()).setNegativeButton("Cancel",(d,w)->result.cancel()).setOnCancelListener(d->result.cancel()).show();return true;
+   }
+   @Override public boolean onJsPrompt(WebView v,String url,String message,String value,JsPromptResult result){
+    EditText input=new EditText(MainActivity.this);input.setText(value);
+    new AlertDialog.Builder(MainActivity.this).setMessage(message).setView(input).setPositiveButton("Save",(d,w)->result.confirm(input.getText().toString())).setNegativeButton("Cancel",(d,w)->result.cancel()).setOnCancelListener(d->result.cancel()).show();return true;
+   }
    @Override public void onGeolocationPermissionsShowPrompt(String origin,GeolocationPermissions.Callback callback){
     if(!trusted(Uri.parse(origin))){callback.invoke(origin,false,false);return;}
     if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)==PackageManager.PERMISSION_GRANTED||checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)==PackageManager.PERMISSION_GRANTED){callback.invoke(origin,true,false);return;}
