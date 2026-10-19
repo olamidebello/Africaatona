@@ -1,45 +1,60 @@
 ---
-- name: Provision private routing and geocoding when no external endpoints supplied
+- name: Select providers according to existing configuration and server capacity
   hosts: all
   become: true
   tasks:
-    - name: Require a complete external provider pair or automatic local providers
+    - name: Require a complete external provider pair or automatic configuration
       ansible.builtin.assert:
         that:
           - (lookup('env','ATONA_ROUTING_URL') == '') == (lookup('env','ATONA_GEOCODER_URL') == '')
-        fail_msg: Supply both external provider URLs or unset both for automatic self-hosting.
+        fail_msg: Supply both external provider URLs or unset both for automatic configuration.
+    - name: Inspect available capacity before importing map data
+      ansible.builtin.command:
+        argv:
+          - python3
+          - -c
+          - "import json,shutil; from pathlib import Path; mem=int(next(x.split()[1] for x in Path('/proc/meminfo').read_text().splitlines() if x.startswith('MemTotal:')))//1024; print(json.dumps({'ram_mb':mem,'free_gib':shutil.disk_usage('/var/lib').free//(1024**3)}))"
+      changed_when: false
+      register: atona_capacity
+    - name: Select private providers only when capacity is sufficient
+      ansible.builtin.set_fact:
+        atona_local_providers: "{{ lookup('env','ATONA_ROUTING_URL') == '' and ((atona_capacity.stdout | from_json).ram_mb | int >= 16000) and ((atona_capacity.stdout | from_json).free_gib | int >= 80) }}"
+    - name: Report provider selection
+      ansible.builtin.debug:
+        msg: "RAM={{ (atona_capacity.stdout | from_json).ram_mb }} MiB; free disk={{ (atona_capacity.stdout | from_json).free_gib }} GiB. {{ 'Import private Nigeria routing/geocoding providers.' if atona_local_providers | bool else ('Use configured external providers.' if lookup('env','ATONA_ROUTING_URL') else 'Deploy website, HTTPS, administrator GUI and APK now. Routing and destination search remain unavailable pending provider configuration or additional server capacity.') }}"
     - name: Inspect Docker availability
       ansible.builtin.command: docker --version
       register: docker_available
       failed_when: false
       changed_when: false
-      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+      when: atona_local_providers | bool
     - name: Install Docker only if absent
       ansible.builtin.apt:
         name: docker.io
         state: present
         update_cache: true
-      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == '' and docker_available.rc != 0
+      when: atona_local_providers | bool and docker_available.rc != 0
     - name: Ensure Docker runs
       ansible.builtin.systemd:
         name: docker
         enabled: true
         state: started
-      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+      when: atona_local_providers | bool
     - name: Install provider provisioning worker
       ansible.builtin.copy:
         src: providers.py
         dest: /usr/local/sbin/africaatona-providers
         mode: '0700'
-      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+      when: atona_local_providers | bool
     - name: Import regional dataset and validate both local providers
       ansible.builtin.command:
         argv: [python3, /usr/local/sbin/africaatona-providers]
       async: 28800
       poll: 15
-      when: lookup('env','ATONA_ROUTING_URL') == '' and lookup('env','ATONA_GEOCODER_URL') == ''
+      when: atona_local_providers | bool
 - import_playbook: provision.yml
   vars:
-    routing_url: "{{ lookup('env','ATONA_ROUTING_URL') or 'http://127.0.0.1:5007' }}"
-    geocoder_url: "{{ lookup('env','ATONA_GEOCODER_URL') or 'http://127.0.0.1:8087' }}"
+    routing_url: "{{ lookup('env','ATONA_ROUTING_URL') or ('http://127.0.0.1:5007' if atona_local_providers | bool else '') }}"
+    geocoder_url: "{{ lookup('env','ATONA_GEOCODER_URL') or ('http://127.0.0.1:8087' if atona_local_providers | bool else '') }}"
+    allow_deferred_providers: true
     provision_namecheap: false

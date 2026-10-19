@@ -20,8 +20,8 @@
           - app_root == '/opt/africaatona'
           - domain == 'africaatona.africandroid.world'
           - port | int == 8097
-          - routing_url == 'http://127.0.0.1:5007' or routing_url is match('^https://[^\s"\x27]+$')
-          - geocoder_url == 'http://127.0.0.1:8087' or geocoder_url is match('^https://[^\s"\x27]+$')
+          - (allow_deferred_providers | default(false) | bool and routing_url == '' and geocoder_url == '') or routing_url == 'http://127.0.0.1:5007' or routing_url is match('^https://[^\s"\x27]+$')
+          - (allow_deferred_providers | default(false) | bool and routing_url == '' and geocoder_url == '') or geocoder_url == 'http://127.0.0.1:8087' or geocoder_url is match('^https://[^\s"\x27]+$')
         fail_msg: Set ATONA_ROUTING_URL and ATONA_GEOCODER_URL to your authorized production provider base URLs before deployment.
     - name: Require existing Olamidepanel
       ansible.builtin.getent:
