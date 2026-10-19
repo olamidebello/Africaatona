@@ -58,6 +58,8 @@ TLS, health checks and inventory registration run only after DNS resolves to the
 
 ## Android app and downloads
 
+Verified CI build: https://github.com/olamidebello/africanappsstore/releases/tag/atona-beta-2 (successful run 39337582062). The deployment playbook defaults to this pinned development release and installs its checksum-verified APK. APK SHA-256: `b3b8364596042ca86414afb17add09f9cff27282d991274a6f00dc583d1d7671`. Android compilation succeeded; no physical-device or road test has been performed. Server access is blocked in the authoring environment; DNS, TLS, runtime provider calls and website download deployment remain unverified.
+
 The workflow builds `android/` using Java 17, Gradle 8.9, Android SDK 35 and AGP 8.7.3. Pushes changing Android source start the build. See Actions and the versioned `atona-beta-N` prerelease. These are development-signed APKs; configure a protected, stable production signing key and release process before distributing production upgrades or submitting to Google Play. Debug signing keys may differ between CI runs, requiring uninstall before upgrading.
 
 The source is also published under `mobile/africa-atona/` in `olamidebello/africanappsstore` with its own build workflow. No existing app-store code is replaced. To deploy a successful app-store prerelease, set `ATONA_APK_TAG` and run:

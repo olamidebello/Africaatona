@@ -11,8 +11,8 @@
     provision_namecheap: true
     routing_url: "{{ lookup('env', 'ATONA_ROUTING_URL') }}"
     geocoder_url: "{{ lookup('env', 'ATONA_GEOCODER_URL') }}"
-    apk_repository: Africaatona
-    apk_tag: "{{ lookup('env', 'ATONA_APK_TAG') }}"
+    apk_repository: africanappsstore
+    apk_tag: "{{ lookup('env', 'ATONA_APK_TAG') or 'atona-beta-2' }}"
   tasks:
     - name: Validate fixed installation and upstream settings
       ansible.builtin.assert:
