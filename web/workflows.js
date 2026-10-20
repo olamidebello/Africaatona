@@ -124,6 +124,7 @@ refreshReports=async function(){
   await originalRefresh();applyMapPreferences();
   const list=state.latestReports||[];const cards=$('reports').querySelectorAll('.card');
   cards.forEach((card,index)=>{const report=list[index];if(!report)return;
+    if(prefs.ui==='pcm'&&report.kind==='Traffic')card.append(el('p',AtonaPidgin.traffic({reported:true}),'hint'));
     card.append(el('p',`${report.confirmations} confirmations · ${report.cleared} no longer there`,'hint'));
     for(const [label,value] of [['Still there',1],['Not there',-1]])btn(label,guard(async()=>{await api('report-vote',{id:report.id,value});await refreshReports();}),card);
   });

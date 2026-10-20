@@ -64,7 +64,7 @@ $('searchForm').onsubmit=async event=>{
     goStatus.textContent='Navigation started.';$('results').replaceChildren();sheet.scrollTop=0;
     if(state.startMode==='manual')toast('Directions started from your entered address. Live GPS is off; use Next direction or switch to live GPS.');
   }catch(error){goStatus.textContent=error.message;toast(error.message);$('results').replaceChildren();}
-  finally{goBusy=false;goButton.disabled=false;goButton.textContent='Go';for(const input of [$('search'),sourceAddress,sourceToggle,currentLocation])input.disabled=false;$('searchForm').removeAttribute('aria-busy');}
+  finally{goBusy=false;goButton.disabled=false;goButton.textContent=uiText('Go','Oya, go!');for(const input of [$('search'),sourceAddress,sourceToggle,currentLocation])input.disabled=false;$('searchForm').removeAttribute('aria-busy');}
 };
 const manualTools=el('div',undefined,'manual-navigation');manualTools.hidden=true;$('navigation').append(manualTools);
 function renderManualTools(){
@@ -81,3 +81,13 @@ const changeJourney=btn('Change journey',()=>{stopNav();document.body.classList.
 changeJourney.className='text-button';
 
 if(state.dest){selectedDestination=AtonaJourney.place(state.dest);$('search').value=selectedDestination.label;}
+
+function translateGoLabels(){
+ destinationLabel.textContent=uiText('Destination','Where you dey go?');
+ sourceLabel.textContent=uiText('Starting address','Where you dey start from?');
+ if(!goBusy)goButton.textContent=uiText('Go','Oya, go!');
+ sourceToggle.textContent=sourceFields.hidden?uiText('＋ Add starting address','＋ Put where you dey start'):uiText('− Use current location instead','− Use where I dey now');
+ currentLocation.textContent=uiText('Use my current location','Use where I dey now');
+ if(!goBusy)goStatus.textContent=uiText('Enter your destination, then tap Go.','Put where you dey go, then press Oya, go! Make we waka.');
+}
+document.addEventListener('atona-language-change',translateGoLabels);translateGoLabels();

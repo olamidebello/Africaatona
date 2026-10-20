@@ -47,7 +47,7 @@
     - name: Check landing-page files are present in the fetched revision
       ansible.builtin.stat:
         path: '{{ atona_source }}/web/{{ item }}'
-      loop: [index.html, landing.css, landing.js, map.html, mobile.css, mobile.js, journey.js, go.js]
+      loop: [index.html, landing.css, landing.js, map.html, mobile.css, mobile.js, journey.js, go.js, pidgin.js]
       register: landing_files
     - name: Require complete landing-page release
       ansible.builtin.assert:
@@ -140,6 +140,7 @@
             - {path: mobile.js, marker: 'prepareRoute'}
             - {path: journey.js, marker: 'AtonaJourney'}
             - {path: go.js, marker: 'getGoLocation'}
+            - {path: pidgin.js, marker: 'AtonaPidgin'}
           register: public_page
           failed_when: public_page.status | default(0) != 200 or item.marker not in (public_page.content | default(''))
       rescue:
