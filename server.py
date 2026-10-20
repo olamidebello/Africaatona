@@ -173,7 +173,7 @@ class Handler(BaseHTTPRequestHandler):
   uid=user['id']
   with db() as c:
    if path=='/api/preferences':
-    allowed={'units':('km','mi'),'sound':('all','alerts','mute'),'ui':('en','fr','pt','sw','yo','ha','ar'),'dark':(True,False),'historyEnabled':(True,False),'showSpeed':(True,False),'showReports':(True,False)}
+    allowed={'units':('km','mi'),'sound':('all','alerts','mute'),'ui':('en','fr','pt','sw','yo','ha','ar','pcm'),'dark':(True,False),'historyEnabled':(True,False),'showSpeed':(True,False),'showReports':(True,False)}
     if any(k not in allowed or v not in allowed[k] for k,v in b.items()):raise ValueError()
     row=c.execute('SELECT payload FROM preferences WHERE user_id=?',(uid,)).fetchone()
     prefs=json.loads(row['payload']) if row else {};prefs.update(b)

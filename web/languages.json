@@ -56,6 +56,14 @@
     "sign": false
   },
   {
+    "id": "pcm",
+    "name": "African Pidgin — Nigerian Pidgin (Naija)",
+    "region": "West Africa",
+    "translation": "core-labels-draft",
+    "voice": "device-dependent",
+    "sign": false
+  },
+  {
     "id": "preference-408",
     "name": "!Xóõ / Taa",
     "region": "Southern Africa",
@@ -2899,14 +2907,6 @@
     "id": "preference-499",
     "name": "Nigerian Fulfulde",
     "region": "Varieties",
-    "translation": "English fallback",
-    "voice": "device-dependent",
-    "sign": false
-  },
-  {
-    "id": "preference-75",
-    "name": "Nigerian Pidgin",
-    "region": "West Africa",
     "translation": "English fallback",
     "voice": "device-dependent",
     "sign": false

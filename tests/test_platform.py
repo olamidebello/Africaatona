@@ -67,7 +67,7 @@ class PlatformTests(unittest.TestCase):
   a=self.account('history-a');b=self.account('history-b')
   place={'label':'Destination','lat':6.5,'lon':3.3}
   self.assertEqual(self.req('/api/history',place,a)[0],409)
-  self.assertEqual(self.req('/api/preferences',{'historyEnabled':True,'units':'mi'},a)[0],200)
+  self.assertEqual(self.req('/api/preferences',{'historyEnabled':True,'units':'mi','ui':'pcm'},a)[0],200)
   self.assertEqual(self.req('/api/history',place,a)[0],200)
   self.assertEqual(len(self.req('/api/history',cookie=a)[2]),1)
   self.assertEqual(self.req('/api/history',cookie=b)[2],[])
