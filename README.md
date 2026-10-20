@@ -94,3 +94,23 @@ The automatic playbook then runs existing hosting/TLS/APK deployment with DNS ch
 Super administration is available at `/admin.html` after deployment. The backend adds role/disabled columns and an audit table without replacing accounts. It supports account enable/disable, grant/remove super-admin access, session revocation, report deletion, database resource counts and audit history. Requests require a super-admin session; mutations additionally require the configured same-origin Origin header. No password hashes are exposed. It refuses self-disable and self-demotion.
 
 The deployment explicitly promotes `ATONA_ADMIN_EMAIL` (default `dobcalldemo@gmail.com`) if that account exists, preserving its password. Otherwise it creates a random password and saves new credentials to root-only `/var/lib/africaatona-admin/credentials.json`; no password is printed by Ansible. Use your existing password for an existing account. The navigation includes an Administration link. Other domains' administrator accounts are independent.
+
+## Pull and deploy an existing installation
+
+After the landing-page changes and playbook are published to GitHub, run on the hosting server:
+
+```bash
+cd /opt/africaatona-source
+git pull --ff-only origin main
+ansible-playbook -i localhost, -c local deploy/pull-and-deploy.yml
+```
+
+Or run from an Ansible controller with SSH access:
+
+```bash
+ansible-playbook -i 181.214.149.146, -u root deploy/pull-and-deploy.yml
+```
+
+The playbook pulls `main` into `/opt/africaatona-source` on the target server, refuses to discard local source edits, runs the application tests, and requires all landing-page assets before changing the installation. It snapshots the installed files, copies the server and web files, restarts `africaatona`, checks backend health, validates nginx and checks the public HTTPS homepage, stylesheet, script and map. A failed deployment restores the previous files and restarts the service. Snapshot paths are printed and retained for operator cleanup. The application database and protected environment remain in their existing locations; downloaded APKs, DNS and TLS are retained. This update playbook does not provision a new server or configure providers.
+
+To deploy a specific published commit, append `-e atona_revision=<commit-sha>`. The homepage is `/`; the navigation application is `/map.html`.

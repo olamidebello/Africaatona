@@ -1,0 +1,127 @@
+---
+- name: Pull and deploy updates to the existing Africa Atona installation
+  hosts: all
+  become: true
+  gather_facts: false
+  vars:
+    atona_repository: https://github.com/olamidebello/africaatona.git
+    atona_revision: main
+    atona_source: /opt/africaatona-source
+    atona_root: /opt/africaatona
+    atona_domain: africaatona.africandroid.world
+  tasks:
+    - name: Check existing installation
+      ansible.builtin.stat:
+        path: '{{ item }}'
+      loop:
+        - /etc/africaatona.env
+        - '{{ atona_root }}/server.py'
+        - '{{ atona_root }}/web/index.html'
+      register: installed
+    - name: Require existing provisioned service and fixed deployment paths
+      ansible.builtin.assert:
+        that:
+          - installed.results | map(attribute='stat.exists') | min
+          - atona_source == '/opt/africaatona-source'
+          - atona_root == '/opt/africaatona'
+          - atona_domain == 'africaatona.africandroid.world'
+          - atona_repository == 'https://github.com/olamidebello/africaatona.git'
+        fail_msg: This update playbook requires an existing Africa Atona installation. Use auto-provision.yml for first installation.
+    - name: Install Git and Python test runtime
+      ansible.builtin.apt:
+        name: [git, python3]
+        state: present
+    - name: Pull requested revision without discarding server source edits
+      ansible.builtin.git:
+        repo: '{{ atona_repository }}'
+        dest: '{{ atona_source }}'
+        version: '{{ atona_revision }}'
+        update: true
+        force: false
+      register: source_revision
+    - name: Test the fetched application before deployment
+      ansible.builtin.command:
+        argv: [python3, -m, unittest, discover, -s, tests, -v]
+        chdir: '{{ atona_source }}'
+      changed_when: false
+    - name: Check landing-page files are present in the fetched revision
+      ansible.builtin.stat:
+        path: '{{ atona_source }}/web/{{ item }}'
+      loop: [index.html, landing.css, landing.js, map.html]
+      register: landing_files
+    - name: Require complete landing-page release
+      ansible.builtin.assert:
+        that:
+          - landing_files.results | map(attribute='stat.exists') | min
+        fail_msg: Publish the landing-page commit to the selected repository revision before deploying.
+    - name: Create private rollback directory
+      ansible.builtin.tempfile:
+        state: directory
+        path: /var/tmp
+        prefix: africaatona-rollback-
+      register: rollback
+    - name: Snapshot installed application before updating
+      ansible.builtin.command:
+        argv: [cp, -a, '{{ atona_root }}/.', '{{ rollback.path }}/']
+      changed_when: true
+    - name: Deploy and verify release
+      block:
+        - name: Install updated web files while retaining downloaded APKs
+          ansible.builtin.copy:
+            src: '{{ atona_source }}/web/'
+            dest: '{{ atona_root }}/web/'
+            remote_src: true
+            owner: root
+            group: root
+            mode: preserve
+        - name: Install application server
+          ansible.builtin.copy:
+            src: '{{ atona_source }}/server.py'
+            dest: '{{ atona_root }}/server.py'
+            remote_src: true
+            owner: root
+            group: root
+            mode: '0644'
+        - name: Restart Africa Atona
+          ansible.builtin.systemd:
+            name: africaatona
+            state: restarted
+        - name: Wait for backend health
+          ansible.builtin.uri:
+            url: http://127.0.0.1:8097/api/health
+            status_code: 200
+          register: health
+          retries: 10
+          delay: 2
+          until: health.status | default(0) == 200
+        - name: Validate existing nginx configuration
+          ansible.builtin.command: nginx -t
+          changed_when: false
+        - name: Verify public HTTPS landing page and map
+          ansible.builtin.uri:
+            url: 'https://{{ atona_domain }}/{{ item.path }}'
+            status_code: 200
+            return_content: true
+            validate_certs: true
+          loop:
+            - {path: '', marker: '/landing.css'}
+            - {path: landing.css, marker: '.hero'}
+            - {path: landing.js, marker: '/api/capabilities'}
+            - {path: map.html, marker: '/app.js'}
+          register: public_page
+          failed_when: public_page.status | default(0) != 200 or item.marker not in (public_page.content | default(''))
+      rescue:
+        - name: Restore previous installed application
+          ansible.builtin.command:
+            argv: [cp, -a, '{{ rollback.path }}/.', '{{ atona_root }}/']
+          changed_when: true
+        - name: Restart restored service
+          ansible.builtin.systemd:
+            name: africaatona
+            state: restarted
+        - name: Report unsuccessful deployment
+          ansible.builtin.fail:
+            msg: 'Deployment failed; previous files restored. Snapshot retained at {{ rollback.path }}. Inspect the failed task above.'
+    - name: Report deployed revision and rollback snapshot
+      ansible.builtin.debug:
+        msg: 'Deployed {{ source_revision.after }} to https://{{ atona_domain }}/. Rollback snapshot: {{ rollback.path }}. Existing environment, database, DNS, TLS and APK downloads retained.'
