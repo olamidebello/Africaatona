@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Destination search",
+    "status": "Available when provider is configured",
+    "resource": "Configured geocoder"
+  },
+  {
+    "name": "Route alternatives and preview",
+    "status": "Available when provider is configured",
+    "resource": "Configured road-routing provider"
+  },
+  {
+    "name": "Turn instructions and rerouting",
+    "status": "Available when provider is configured",
+    "resource": "Routing provider and foreground device GPS"
+  },
+  {
+    "name": "Road map, zoom, recenter",
+    "status": "Implemented",
+    "resource": "Leaflet and OpenStreetMap tile access"
+  },
+  {
+    "name": "GPS speedometer",
+    "status": "Implemented",
+    "resource": "Foreground device GPS; speed may be unavailable"
+  },
+  {
+    "name": "Add or remove a stop",
+    "status": "Implemented",
+    "resource": "Routing provider; one intermediate stop"
+  },
+  {
+    "name": "Saved places, Home and Work",
+    "status": "Implemented",
+    "resource": "Authenticated places database"
+  },
+  {
+    "name": "Rename and delete saved places",
+    "status": "Implemented",
+    "resource": "Authenticated places database"
+  },
+  {
+    "name": "Plan drives and delete plans",
+    "status": "Implemented",
+    "resource": "Authenticated trips database"
+  },
+  {
+    "name": "Navigation history and clear history",
+    "status": "Implemented",
+    "resource": "Opt-in authenticated history database"
+  },
+  {
+    "name": "Share destination link",
+    "status": "Implemented",
+    "resource": "Destination deep link; clipboard or device share sheet"
+  },
+  {
+    "name": "Road condition reports",
+    "status": "Implemented",
+    "resource": "Authenticated reports database; unverified reports expire in two hours"
+  },
+  {
+    "name": "Still there / not there confirmations",
+    "status": "Implemented",
+    "resource": "Authenticated report_votes database; one vote per account"
+  },
+  {
+    "name": "Account registration and login",
+    "status": "Implemented",
+    "resource": "Scrypt password hashes and expiring secure sessions"
+  },
+  {
+    "name": "Edit profile and change password",
+    "status": "Implemented",
+    "resource": "Authenticated account; password change revokes sessions"
+  },
+  {
+    "name": "Map display, units, sound and theme",
+    "status": "Implemented",
+    "resource": "Browser settings; explicit account sync"
+  },
+  {
+    "name": "Language and voice selection",
+    "status": "Implemented",
+    "resource": "Seven core-label translations and installed device voices"
+  },
+  {
+    "name": "Support tickets and map issues",
+    "status": "Implemented",
+    "resource": "Authenticated support_tickets database and admin resolution"
+  },
+  {
+    "name": "Super admin accounts and moderation",
+    "status": "Implemented",
+    "resource": "Role-checked administration and audit log"
+  },
+  {
+    "name": "Android development APK",
+    "status": "Implemented",
+    "resource": "Published APK installed by provisioning"
+  },
+  {
+    "name": "Privacy and account deletion",
+    "status": "Implemented",
+    "resource": "Active account data removed; rotating backups retained seven days"
+  },
+  {
+    "name": "Verified live traffic and congestion colours",
+    "status": "Requires additional resources or implementation",
+    "resource": "Licensed traffic observations and traffic-aware routing engine"
+  },
+  {
+    "name": "Predictive ETA and departure reminders",
+    "status": "Requires additional resources or implementation",
+    "resource": "Historical traffic models, scheduler and push delivery"
+  },
+  {
+    "name": "Live drive sharing and group ETA",
+    "status": "Requires additional resources or implementation",
+    "resource": "Explicit opt-in location sharing service, expiring access and foreground/background location integration"
+  },
+  {
+    "name": "Lane guidance and complex junction views",
+    "status": "Requires additional resources or implementation",
+    "resource": "Lane-level map data and compatible routing provider"
+  },
+  {
+    "name": "Speed limits and speeding alerts",
+    "status": "Requires additional resources or implementation",
+    "resource": "Validated road speed-limit dataset and map matching"
+  },
+  {
+    "name": "Camera and enforcement-zone alerts",
+    "status": "Requires additional resources or implementation",
+    "resource": "Verified regional camera dataset and alert engine"
+  },
+  {
+    "name": "Toll and congestion charge pricing",
+    "status": "Requires additional resources or implementation",
+    "resource": "Current toll tariffs, vehicle class and routing integration"
+  },
+  {
+    "name": "Avoid tolls, ferries, motorways and unpaved roads",
+    "status": "Requires additional resources or implementation",
+    "resource": "Routing engine profiles supporting each avoidance"
+  },
+  {
+    "name": "Motorcycle, taxi and EV routing",
+    "status": "Requires additional resources or implementation",
+    "resource": "Vehicle-specific road profiles and restrictions"
+  },
+  {
+    "name": "Parking availability and booking",
+    "status": "Requires additional resources or implementation",
+    "resource": "Parking inventory and booking provider"
+  },
+  {
+    "name": "Fuel station prices",
+    "status": "Requires additional resources or implementation",
+    "resource": "Current station and price provider"
+  },
+  {
+    "name": "EV chargers and charging payments",
+    "status": "Requires additional resources or implementation",
+    "resource": "Charger inventory, connector data and booking/payment integration"
+  },
+  {
+    "name": "Offline navigation",
+    "status": "Requires additional resources or implementation",
+    "resource": "Licensed offline map package and native routing engine"
+  },
+  {
+    "name": "Background navigation",
+    "status": "Requires additional resources or implementation",
+    "resource": "Native foreground-location service and mobile lifecycle work"
+  },
+  {
+    "name": "Android Auto / CarPlay / Android Automotive",
+    "status": "Requires additional resources or implementation",
+    "resource": "Native vehicle templates, supported SDKs and distribution approval"
+  },
+  {
+    "name": "Bluetooth and audio-player integration",
+    "status": "Requires additional resources or implementation",
+    "resource": "Native device audio sessions and provider integration"
+  },
+  {
+    "name": "Calendar and contacts sync",
+    "status": "Requires additional resources or implementation",
+    "resource": "Explicit device permissions and native integrations"
+  },
+  {
+    "name": "Voice destination search and hands-free reporting",
+    "status": "Requires additional resources or implementation",
+    "resource": "Speech-recognition support and reviewed voice workflow"
+  },
+  {
+    "name": "Recorded voices and sign-language guidance",
+    "status": "Requires additional resources or implementation",
+    "resource": "Licensed recorded audio and reviewed visual language resources"
+  },
+  {
+    "name": "Map editing with published road changes",
+    "status": "Requires additional resources or implementation",
+    "resource": "Road graph editing, review, data validation and routing re-import pipeline"
+  },
+  {
+    "name": "Account password reset by email",
+    "status": "Requires additional resources or implementation",
+    "resource": "Configured mail delivery, reset-token workflow and verification"
+  },
+  {
+    "name": "Full African language translation",
+    "status": "Requires additional resources or implementation",
+    "resource": "Reviewed translations of all screens and route instructions"
+  },
+  {
+    "name": "Emergency and crisis-service integrations",
+    "status": "Requires additional resources or implementation",
+    "resource": "Regional authorized service integrations; support tickets are not emergency dispatch"
+  }
+]

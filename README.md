@@ -114,3 +114,17 @@ ansible-playbook -i 181.214.149.146, -u root deploy/pull-and-deploy.yml
 The playbook pulls `main` into `/opt/africaatona-source` on the target server, refuses to discard local source edits, runs the application tests, and requires all landing-page assets before changing the installation. It snapshots the installed files, copies the server and web files, restarts `africaatona`, checks backend health, validates nginx and checks the public HTTPS homepage, stylesheet, script and map. A failed deployment restores the previous files and restarts the service. Snapshot paths are printed and retained for operator cleanup. The application database and protected environment remain in their existing locations; downloaded APKs, DNS and TLS are retained. This update playbook does not provision a new server or configure providers.
 
 To deploy a specific published commit, append `-e atona_revision=<commit-sha>`. The homepage is `/`; the navigation application is `/map.html`.
+
+## Navigation workflows and resource coverage
+
+The map Menu now links saved places, planned drives, opt-in recent journeys, account/profile, map/privacy settings, support tickets, route overview/steps, stop navigation and feature availability. Destination cards support destination-link sharing and stop removal. Fuel, parking, charging and food buttons use the configured geocoder for place searches; they do not provide prices, availability or bookings.
+
+Database migrations create `preferences`, `history`, `report_votes` and `support_tickets` without replacing existing tables. Settings sync and history are explicit account actions. History is off by default and limited to 100 destinations per account. Password changes verify the current password and revoke all sessions. Report confirmations allow one replaceable vote per account and reject self-confirmation. Support tickets are visible to their owner and super administrators, who can resolve them through the admin GUI. Existing origin checks, session authorization and rate limits apply to these endpoints. Account deletion removes the additional account records.
+
+`web/features.json` is the item-by-item implementation/resource inventory displayed by Menu → Features & availability. It distinguishes implemented workflows from conditional provider features and work still requiring additional resources. Waze feature parity is **not complete**: live traffic/predictive ETA, live journey sharing, road-data alerts, specialized vehicle routing, avoidance profiles, parking/EV/fuel services, offline/background navigation, native car integrations, mail reset delivery and full translations require the listed implementation and resources. No Waze API, proprietary feed, account or map data is assumed. Reference: https://support.google.com/waze/?hl=en and https://www.waze.com/faq .
+
+Deploy with the same single command:
+
+```bash
+cd /opt/africaatona-source && git pull --ff-only origin main && ansible-playbook -i localhost, -c local deploy/pull-and-deploy.yml
+```

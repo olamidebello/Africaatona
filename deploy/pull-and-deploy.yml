@@ -82,6 +82,14 @@
             owner: root
             group: root
             mode: '0644'
+        - name: Update maintenance worker
+          ansible.builtin.copy:
+            src: '{{ atona_source }}/deploy/maintenance.py'
+            dest: '{{ atona_root }}/deploy/maintenance.py'
+            remote_src: true
+            owner: root
+            group: root
+            mode: '0644'
         - name: Restart Africa Atona
           ansible.builtin.systemd:
             name: africaatona

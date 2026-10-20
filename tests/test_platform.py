@@ -63,6 +63,61 @@ class PlatformTests(unittest.TestCase):
   self.assertEqual(self.req('/api/delete-account',{},a)[0],200)
   self.assertIsNone(self.req('/api/me',cookie=a)[2]['user'])
   with server.db() as c:self.assertEqual(c.execute("SELECT count(*) FROM users WHERE email='delete@example.com'").fetchone()[0],0)
+ def test_preferences_history_isolation_and_opt_out(self):
+  a=self.account('history-a');b=self.account('history-b')
+  place={'label':'Destination','lat':6.5,'lon':3.3}
+  self.assertEqual(self.req('/api/history',place,a)[0],409)
+  self.assertEqual(self.req('/api/preferences',{'historyEnabled':True,'units':'mi'},a)[0],200)
+  self.assertEqual(self.req('/api/history',place,a)[0],200)
+  self.assertEqual(len(self.req('/api/history',cookie=a)[2]),1)
+  self.assertEqual(self.req('/api/history',cookie=b)[2],[])
+  self.assertEqual(self.req('/api/preferences',{'units':'invalid'},a)[0],400)
+  self.assertEqual(self.req('/api/preferences',{'historyEnabled':False},a)[0],200)
+  self.assertEqual(self.req('/api/history',cookie=a)[2],[])
+ def test_profile_password_revokes_sessions(self):
+  a=self.account('profile')
+  self.assertEqual(self.req('/api/profile',{'name':'Updated Driver'},a)[0],200)
+  self.assertEqual(self.req('/api/me',cookie=a)[2]['user']['name'],'Updated Driver')
+  self.assertEqual(self.req('/api/password',{'current':'wrong','password':'replacement-password-123'},a)[0],403)
+  self.assertEqual(self.req('/api/password',{'current':'strong-password-123','password':'replacement-password-123'},a)[0],200)
+  self.assertIsNone(self.req('/api/me',cookie=a)[2]['user'])
+  self.assertEqual(self.req('/api/login',{'email':'profile@example.com','password':'replacement-password-123'})[0],200)
+ def test_report_vote_replacement_and_ownership(self):
+  a=self.account('reporter');b=self.account('voter')
+  self.req('/api/reports',{'kind':'Traffic','lat':6,'lon':3,'note':'vote target'},a)
+  report=next(r for r in self.req('/api/reports')[2] if r['note']=='vote target')
+  self.assertEqual(self.req('/api/report-vote',{'id':report['id'],'value':1},a)[0],400)
+  self.assertEqual(self.req('/api/report-vote',{'id':report['id'],'value':1},b)[0],200)
+  self.assertEqual(self.req('/api/report-vote',{'id':report['id'],'value':-1},b)[0],200)
+  updated=next(r for r in self.req('/api/reports')[2] if r['id']==report['id'])
+  self.assertEqual((updated['confirmations'],updated['cleared']),(0,1))
+ def test_ticket_owner_and_admin_resolution(self):
+  a=self.account('ticket');b=self.account('ticket-admin')
+  self.assertEqual(self.req('/api/support',{'subject':'Map problem','body':'The road name is incorrect.'},a)[0],200)
+  ticket=self.req('/api/support',cookie=a)[2][0]
+  self.assertEqual(self.req('/api/support',cookie=b)[2],[])
+  self.assertEqual(self.req('/api/admin',{'id':ticket['id'],'action':'resolve_ticket'},a)[0],403)
+  with server.db() as c:c.execute("UPDATE users SET role='super_admin' WHERE email='ticket-admin@example.com'")
+  self.assertEqual(self.req('/api/admin',{'id':ticket['id'],'action':'resolve_ticket'},b)[0],200)
+  self.assertEqual(self.req('/api/support',cookie=a)[2][0]['status'],'resolved')
+ def test_saved_place_edit_isolation_and_trip_validation(self):
+  a=self.account('place-edit');b=self.account('place-other')
+  self.req('/api/places',{'label':'Original','lat':6,'lon':3},a)
+  place=self.req('/api/places',cookie=a)[2][0]
+  self.req('/api/places',{**place,'label':'Other edit'},b)
+  self.assertEqual(self.req('/api/places',cookie=a)[2][0]['label'],'Original')
+  self.req('/api/places',{**place,'label':'Home'},a)
+  self.assertEqual(self.req('/api/places',cookie=a)[2][0]['label'],'Home')
+  self.assertEqual(self.req('/api/trips',{'label':'Past','lat':6,'lon':3,'arrival':'2020-01-01T00:00:00Z'},a)[0],400)
+ def test_new_records_deleted_with_account(self):
+  a=self.account('workflow-delete')
+  self.req('/api/preferences',{'historyEnabled':True},a)
+  self.req('/api/history',{'label':'Private','lat':6,'lon':3},a)
+  self.req('/api/support',{'subject':'Private ticket','body':'Delete this ticket with account.'},a)
+  self.req('/api/delete-account',{},a)
+  with server.db() as c:
+   self.assertEqual(c.execute("SELECT COUNT(*) FROM history WHERE label='Private'").fetchone()[0],0)
+   self.assertEqual(c.execute("SELECT COUNT(*) FROM support_tickets WHERE subject='Private ticket'").fetchone()[0],0)
  def test_traversal(self):self.assertEqual(self.req('/../server.py')[0],404)
 class DNSTests(unittest.TestCase):
  def test_preserve_zone_and_idempotency(self):

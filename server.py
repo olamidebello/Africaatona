@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """AFRICA ATONA: same-origin API and static hosting; Python standard library."""
+from datetime import datetime, timezone
 import hashlib, hmac, json, math, os, secrets, sqlite3, threading, time
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
@@ -19,6 +20,7 @@ def init():
   columns={r[1] for r in c.execute('PRAGMA table_info(users)')}
   if 'role' not in columns:c.execute("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'")
   if 'disabled' not in columns:c.execute('ALTER TABLE users ADD COLUMN disabled INTEGER NOT NULL DEFAULT 0')
+  c.executescript('''CREATE TABLE IF NOT EXISTS preferences(user_id INTEGER PRIMARY KEY,payload TEXT NOT NULL); CREATE TABLE IF NOT EXISTS history(id INTEGER PRIMARY KEY,user_id INTEGER,label TEXT,lat REAL,lon REAL,created REAL); CREATE TABLE IF NOT EXISTS report_votes(report_id INTEGER,user_id INTEGER,value INTEGER,PRIMARY KEY(report_id,user_id)); CREATE TABLE IF NOT EXISTS support_tickets(id INTEGER PRIMARY KEY,user_id INTEGER,subject TEXT,body TEXT,status TEXT DEFAULT 'open',created REAL);''')
   c.execute('CREATE TABLE IF NOT EXISTS admin_audit(id INTEGER PRIMARY KEY,actor INTEGER,action TEXT,target INTEGER,created REAL)')
 def password(p,s): return hashlib.scrypt(p.encode(),salt=bytes.fromhex(s),n=16384,r=8,p=1).hex()
 def coord(lat,lon):
@@ -39,7 +41,7 @@ class Handler(BaseHTTPRequestHandler):
   for k,v in (headers or {}).items(): self.send_header(k,v)
   self.end_headers(); self.wfile.write(body)
  def security(self):
-  self.send_header('X-Content-Type-Options','nosniff'); self.send_header('Referrer-Policy','strict-origin-when-cross-origin'); self.send_header('X-Frame-Options','DENY')
+  self.send_header('X-Content-Type-Options','nosniff'); self.send_header('Referrer-Policy','strict-origin-when-cross-origin'); self.send_header('X-Frame-Options','SAMEORIGIN')
  def user(self):
   from http.cookies import SimpleCookie
   cookie=SimpleCookie(); cookie.load(self.headers.get('Cookie','')); token=cookie.get('atona')
@@ -61,13 +63,25 @@ class Handler(BaseHTTPRequestHandler):
     users=[dict(r) for r in c.execute('SELECT id,email,name,role,disabled FROM users ORDER BY id DESC LIMIT 500')]
     reports=[dict(r) for r in c.execute('SELECT id,user_id,kind,note,created FROM reports ORDER BY id DESC LIMIT 200')]
     audit=[dict(r) for r in c.execute('SELECT * FROM admin_audit ORDER BY id DESC LIMIT 200')]
-    counts={t:c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0] for t in ('users','sessions','reports','places','trips')}
-   return self.send(200,dict(users=users,reports=reports,audit=audit,counts=counts,providers={'routing':bool(os.getenv('ROUTING_URL')),'geocoding':bool(os.getenv('GEOCODER_URL'))}))
+    counts={t:c.execute('SELECT COUNT(*) FROM '+t).fetchone()[0] for t in ('users','sessions','reports','places','trips','history','support_tickets')}
+    tickets=[dict(r) for r in c.execute('SELECT * FROM support_tickets ORDER BY id DESC LIMIT 200')]
+   return self.send(200,dict(tickets=tickets,users=users,reports=reports,audit=audit,counts=counts,providers={'routing':bool(os.getenv('ROUTING_URL')),'geocoding':bool(os.getenv('GEOCODER_URL'))}))
+  if p.path in ('/api/preferences','/api/history','/api/support'):
+   user=self.user()
+   if not user:return self.send(401,{'error':'Sign in first'})
+   with db() as c:
+    if p.path=='/api/preferences':
+     row=c.execute('SELECT payload FROM preferences WHERE user_id=?',(user['id'],)).fetchone()
+     result=json.loads(row['payload']) if row else {}
+    else:
+     table='history' if p.path.endswith('history') else 'support_tickets'
+     result=[dict(r) for r in c.execute('SELECT * FROM '+table+' WHERE user_id=? ORDER BY id DESC LIMIT 100',(user['id'],))]
+   return self.send(200,result)
   if p.path=='/api/health': return self.send(200,{'ok':True,'application':'AFRICA ATONA'})
   if p.path=='/api/me': return self.send(200,{'user':self.user()})
   if p.path=='/api/capabilities': return self.send(200,{'routing':bool(os.getenv('ROUTING_URL')),'search':bool(os.getenv('GEOCODER_URL')),'liveTraffic':False,'speedLimits':False,'reportKinds':KINDS,'apk':(ROOT/'web/downloads/africa-atona.apk').is_file()})
   if p.path=='/api/reports':
-   with db() as c: rows=c.execute('SELECT id,kind,lat,lon,note,created FROM reports WHERE created>? ORDER BY created DESC LIMIT 250',(time.time()-7200,)).fetchall()
+   with db() as c: rows=c.execute('SELECT id,kind,lat,lon,note,created,(SELECT COUNT(*) FROM report_votes v WHERE v.report_id=reports.id AND value=1) confirmations,(SELECT COUNT(*) FROM report_votes v WHERE v.report_id=reports.id AND value=-1) cleared FROM reports WHERE created>? ORDER BY created DESC LIMIT 250',(time.time()-7200,)).fetchall()
    return self.send(200,[dict(x) for x in rows])
   if p.path in ['/api/places','/api/trips']:
    user=self.user()
@@ -109,6 +123,49 @@ class Handler(BaseHTTPRequestHandler):
   if not target.is_relative_to((ROOT/'web').resolve()) or not target.is_file():return self.send(404,{'error':'Not found'})
   import mimetypes
   body=target.read_bytes(); self.send_response(200); self.send_header('Content-Type',mimetypes.guess_type(str(target))[0] or 'application/octet-stream'); self.send_header('Content-Length',str(len(body))); self.security(); self.end_headers(); self.wfile.write(body)
+ def workflow(self,path,b,user,now):
+  uid=user['id']
+  with db() as c:
+   if path=='/api/preferences':
+    allowed={'units':('km','mi'),'sound':('all','alerts','mute'),'ui':('en','fr','pt','sw','yo','ha','ar'),'dark':(True,False),'historyEnabled':(True,False),'showSpeed':(True,False),'showReports':(True,False)}
+    if any(k not in allowed or v not in allowed[k] for k,v in b.items()):raise ValueError()
+    row=c.execute('SELECT payload FROM preferences WHERE user_id=?',(uid,)).fetchone()
+    prefs=json.loads(row['payload']) if row else {};prefs.update(b)
+    c.execute('INSERT OR REPLACE INTO preferences VALUES(?,?)',(uid,json.dumps(prefs)))
+    if b.get('historyEnabled') is False:c.execute('DELETE FROM history WHERE user_id=?',(uid,))
+   elif path=='/api/history':
+    if b.get('clear'):c.execute('DELETE FROM history WHERE user_id=?',(uid,))
+    elif b.get('delete'):c.execute('DELETE FROM history WHERE id=? AND user_id=?',(int(b['delete']),uid))
+    else:
+     row=c.execute('SELECT payload FROM preferences WHERE user_id=?',(uid,)).fetchone()
+     if not row or not json.loads(row['payload']).get('historyEnabled'):return self.send(409,{'error':'Enable navigation history in Privacy settings first'})
+     lat,lon=coord(b['lat'],b['lon']);label=str(b['label']).strip()[:100]
+     if not label:raise ValueError()
+     c.execute('INSERT INTO history(user_id,label,lat,lon,created) VALUES(?,?,?,?,?)',(uid,label,lat,lon,now))
+     c.execute('DELETE FROM history WHERE user_id=? AND id NOT IN (SELECT id FROM history WHERE user_id=? ORDER BY id DESC LIMIT 100)',(uid,uid))
+   elif path=='/api/profile':
+    name=str(b['name']).strip()
+    if not 1<=len(name)<=70:raise ValueError()
+    c.execute('UPDATE users SET name=? WHERE id=?',(name,uid))
+   elif path=='/api/password':
+    old=str(b.get('current',''));new=str(b.get('password',''))
+    if not 12<=len(new)<=128 or len(old)>128:raise ValueError()
+    row=c.execute('SELECT * FROM users WHERE id=?',(uid,)).fetchone()
+    if not hmac.compare_digest(row['password'],password(old,row['salt'])):return self.send(403,{'error':'Current password incorrect'})
+    salt=secrets.token_hex(16)
+    c.execute('UPDATE users SET salt=?,password=? WHERE id=?',(salt,password(new,salt),uid));c.execute('DELETE FROM sessions WHERE user_id=?',(uid,))
+   elif path=='/api/report-vote':
+    report=int(b['id']);value=int(b['value'])
+    if value not in (-1,1):raise ValueError()
+    row=c.execute('SELECT * FROM reports WHERE id=? AND created>?',(report,now-7200)).fetchone()
+    if not row: return self.send(404,{'error':'Report has expired'})
+    if row['user_id']==uid:return self.send(400,{'error':'You cannot confirm your own report'})
+    c.execute('INSERT OR REPLACE INTO report_votes VALUES(?,?,?)',(report,uid,value))
+   elif path=='/api/support':
+    subject=str(b.get('subject','')).strip();body=str(b.get('body','')).strip()
+    if not 3<=len(subject)<=100 or not 10<=len(body)<=2000:raise ValueError()
+    c.execute('INSERT INTO support_tickets(user_id,subject,body,created) VALUES(?,?,?,?)',(uid,subject,body,now))
+  return self.send(200,{'ok':True})
  def do_POST(self):
   try:
    if self.headers.get('Origin')!=ORIGIN:return self.send(403,{'error':'Origin rejected'})
@@ -135,11 +192,16 @@ class Handler(BaseHTTPRequestHandler):
     return self.send(200,{'ok':True},{'Set-Cookie':f'atona={token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=604800'})
    user=self.user()
    if not user:return self.send(401,{'error':'Sign in first'})
+   if path in ('/api/preferences','/api/history','/api/profile','/api/password','/api/report-vote','/api/support'):
+    return self.workflow(path,b,user,now)
    if path=='/api/admin':
     if user['role']!='super_admin':return self.send(403,{'error':'Super administrator access required'})
     target=int(b['id']);action=b['action']
     with db() as c:
-     if action=='delete_report':
+     if action=='resolve_ticket':
+      if not c.execute('SELECT 1 FROM support_tickets WHERE id=?',(target,)).fetchone():raise ValueError()
+      c.execute("UPDATE support_tickets SET status='resolved' WHERE id=?",(target,))
+     elif action=='delete_report':
       if not c.execute('SELECT 1 FROM reports WHERE id=?',(target,)).fetchone():raise ValueError()
       c.execute('DELETE FROM reports WHERE id=?',(target,))
      elif action in ('disable','enable','grant_admin','remove_admin','revoke_sessions'):
@@ -159,7 +221,8 @@ class Handler(BaseHTTPRequestHandler):
     return self.send(200,{'ok':True},{'Set-Cookie':'atona=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0'})
    if path=='/api/delete-account':
     with db() as c:
-     for table in ['sessions','reports','places','trips']:c.execute('DELETE FROM '+table+' WHERE user_id=?',(user['id'],))
+     c.execute('DELETE FROM report_votes WHERE report_id IN (SELECT id FROM reports WHERE user_id=?)',(user['id'],))
+     for table in ['sessions','reports','places','trips','preferences','history','report_votes','support_tickets']:c.execute('DELETE FROM '+table+' WHERE user_id=?',(user['id'],))
      c.execute('DELETE FROM users WHERE id=?',(user['id'],))
     return self.send(200,{'ok':True},{'Set-Cookie':'atona=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0'})
    if path in ['/api/reports','/api/places','/api/trips']:
@@ -172,8 +235,15 @@ class Handler(BaseHTTPRequestHandler):
      if table=='reports':
       if b['kind'] not in KINDS:raise ValueError()
       c.execute('INSERT INTO reports(user_id,kind,lat,lon,note,created) VALUES(?,?,?,?,?,?)',(user['id'],b['kind'],lat,lon,str(b.get('note',''))[:300],now))
+     elif table=='places' and b.get('id'):
+      label=str(b['label']).strip()[:100]
+      if not label:raise ValueError()
+      c.execute('UPDATE places SET label=?,lat=?,lon=? WHERE id=? AND user_id=?',(label,lat,lon,int(b['id']),user['id']))
      elif table=='places':c.execute('INSERT INTO places(user_id,label,lat,lon) VALUES(?,?,?,?)',(user['id'],str(b['label'])[:100],lat,lon))
-     else:c.execute('INSERT INTO trips(user_id,label,lat,lon,arrival) VALUES(?,?,?,?,?)',(user['id'],str(b['label'])[:100],lat,lon,str(b['arrival'])[:40]))
+     else:
+      arrival=datetime.fromisoformat(str(b['arrival']).replace('Z','+00:00'))
+      if arrival.tzinfo is None or arrival.timestamp()<=now:raise ValueError()
+      c.execute('INSERT INTO trips(user_id,label,lat,lon,arrival) VALUES(?,?,?,?,?)',(user['id'],str(b['label'])[:100],lat,lon,arrival.astimezone(timezone.utc).isoformat()))
     return self.send(201,{'ok':True})
    self.send(404,{'error':'Not found'})
   except (ValueError,KeyError,TypeError,json.JSONDecodeError): self.send(400,{'error':'Invalid request'})
