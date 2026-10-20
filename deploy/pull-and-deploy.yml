@@ -62,8 +62,15 @@
       register: rollback
     - name: Snapshot installed application before updating
       ansible.builtin.command:
-        argv: [cp, -a, '{{ atona_root }}/.', '{{ rollback.path }}/']
+        argv: [cp, -a, '{{ atona_root }}/.', '{{ rollback.path }}/application/']
       changed_when: true
+    - name: Snapshot protected service environment
+      ansible.builtin.copy:
+        src: /etc/africaatona.env
+        dest: '{{ rollback.path }}/service.env'
+        remote_src: true
+        mode: '0600'
+      no_log: true
     - name: Deploy and verify release
       block:
         - name: Install updated web files while retaining downloaded APKs
@@ -90,6 +97,11 @@
             owner: root
             group: root
             mode: '0644'
+        - name: Configure low-volume search only if no geocoder is configured
+          ansible.builtin.command:
+            argv: [python3, '{{ atona_source }}/deploy/configure_search.py']
+          register: search_configuration
+          changed_when: (search_configuration.stdout | from_json).changed
         - name: Restart Africa Atona
           ansible.builtin.systemd:
             name: africaatona
@@ -102,6 +114,14 @@
           retries: 10
           delay: 2
           until: health.status | default(0) == 200
+        - name: Verify newly configured address search through the application
+          ansible.builtin.uri:
+            url: http://127.0.0.1:8097/api/search?q=Lagos
+            status_code: 200
+            return_content: true
+          register: search_check
+          failed_when: search_check.status | default(0) != 200 or search_check.json | default([]) | length == 0
+          when: (search_configuration.stdout | from_json).changed
         - name: Validate existing nginx configuration
           ansible.builtin.command: nginx -t
           changed_when: false
@@ -121,8 +141,15 @@
       rescue:
         - name: Restore previous installed application
           ansible.builtin.command:
-            argv: [cp, -a, '{{ rollback.path }}/.', '{{ atona_root }}/']
+            argv: [cp, -a, '{{ rollback.path }}/application/.', '{{ atona_root }}/']
           changed_when: true
+        - name: Restore previous protected service environment
+          ansible.builtin.copy:
+            src: '{{ rollback.path }}/service.env'
+            dest: /etc/africaatona.env
+            remote_src: true
+            mode: '0600'
+          no_log: true
         - name: Restart restored service
           ansible.builtin.systemd:
             name: africaatona

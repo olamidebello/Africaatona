@@ -12,6 +12,7 @@ DB=DATA/'atona.db'
 ORIGIN=os.getenv('PUBLIC_URL','https://africaatona.africandroid.world').rstrip('/')
 KINDS=['Traffic','Police','Crash','Road hazard','Bad weather','Blocked lane','Road closure','Animals','Map issue','Add a place','Gas prices']
 LOCK=threading.Lock(); LIMIT={}; CACHE={}
+SEARCH_LOCK=threading.Lock(); SEARCH_LAST=0.0
 def db():
  c=sqlite3.connect(DB); c.row_factory=sqlite3.Row; return c
 def init():
@@ -20,6 +21,7 @@ def init():
   columns={r[1] for r in c.execute('PRAGMA table_info(users)')}
   if 'role' not in columns:c.execute("ALTER TABLE users ADD COLUMN role TEXT NOT NULL DEFAULT 'user'")
   if 'disabled' not in columns:c.execute('ALTER TABLE users ADD COLUMN disabled INTEGER NOT NULL DEFAULT 0')
+  c.execute('CREATE TABLE IF NOT EXISTS search_cache(key TEXT PRIMARY KEY,payload TEXT,expires REAL)')
   c.executescript('''CREATE TABLE IF NOT EXISTS preferences(user_id INTEGER PRIMARY KEY,payload TEXT NOT NULL); CREATE TABLE IF NOT EXISTS history(id INTEGER PRIMARY KEY,user_id INTEGER,label TEXT,lat REAL,lon REAL,created REAL); CREATE TABLE IF NOT EXISTS report_votes(report_id INTEGER,user_id INTEGER,value INTEGER,PRIMARY KEY(report_id,user_id)); CREATE TABLE IF NOT EXISTS support_tickets(id INTEGER PRIMARY KEY,user_id INTEGER,subject TEXT,body TEXT,status TEXT DEFAULT 'open',created REAL);''')
   c.execute('CREATE TABLE IF NOT EXISTS admin_audit(id INTEGER PRIMARY KEY,actor INTEGER,action TEXT,target INTEGER,created REAL)')
 def password(p,s): return hashlib.scrypt(p.encode(),salt=bytes.fromhex(s),n=16384,r=8,p=1).hex()
@@ -32,6 +34,48 @@ def upstream(url):
   raw=r.read(6000001)
   if len(raw)>6000000: raise ValueError('Provider response too large')
   return json.loads(raw)
+def geocode(base,term,fmt):
+ global SEARCH_LAST
+ if fmt not in ('nominatim','photon'):raise ValueError('Unsupported geocoder format')
+ url=base.rstrip('/')+('/api/?' if fmt=='photon' else '/search?')+urlencode({'q':term,'limit':8,**({} if fmt=='photon' else {'format':'jsonv2'})})
+ key=hashlib.sha256(url.encode()).hexdigest()
+ def cached():
+  with db() as c:
+   row=c.execute('SELECT payload FROM search_cache WHERE key=? AND expires>?',(key,time.time())).fetchone()
+   return json.loads(row['payload']) if row else None
+ hit=cached()
+ if hit is not None:return hit
+ if not SEARCH_LOCK.acquire(blocking=False):return None
+ try:
+  hit=cached()
+  if hit is not None:return hit
+  if time.monotonic()-SEARCH_LAST<1.1:return None
+  SEARCH_LAST=time.monotonic()
+  data=upstream(url)
+  if fmt=='photon':
+   if not isinstance(data,dict) or not isinstance(data.get('features'),list):raise ValueError('Invalid geocoder response')
+   result=[]
+   for feature in data['features'][:8]:
+    geometry=feature.get('geometry') or {};props=feature.get('properties') or {}
+    if geometry.get('type')!='Point':continue
+    coordinates=geometry.get('coordinates',[])
+    if len(coordinates)<2:continue
+    lat,lon=coord(coordinates[1],coordinates[0])
+    street=' '.join(str(props[k]) for k in ('housenumber','street') if props.get(k))
+    parts=[str(props[k]) for k in ('name',) if props.get(k)]+([street] if street else [])+[str(props[k]) for k in ('city','district','state','postcode','country') if props.get(k)]
+    label=', '.join(dict.fromkeys(parts))
+    if label:result.append({'lat':lat,'lon':lon,'display_name':label})
+  else:
+   if not isinstance(data,list):raise ValueError('Invalid geocoder response')
+   result=[]
+   for place in data[:8]:
+    lat,lon=coord(place['lat'],place['lon']);result.append({'lat':lat,'lon':lon,'display_name':str(place['display_name'])[:500]})
+  with db() as c:
+   c.execute('DELETE FROM search_cache WHERE expires<?',(time.time(),))
+   c.execute('INSERT OR REPLACE INTO search_cache VALUES(?,?,?)',(key,json.dumps(result),time.time()+86400))
+   c.execute('DELETE FROM search_cache WHERE key NOT IN (SELECT key FROM search_cache ORDER BY expires DESC LIMIT 1000)')
+  return result
+ finally:SEARCH_LOCK.release()
 class Handler(BaseHTTPRequestHandler):
  def log_message(self,*args): pass
  def send(self,status,obj,headers=None):
@@ -101,7 +145,9 @@ class Handler(BaseHTTPRequestHandler):
     if not base:return self.send(503,{'error':'Destination search is awaiting a geocoding provider. Tap the map to select a destination.'})
     term=q.get('q',[''])[0].strip()[:180]
     if len(term)<3:raise ValueError()
-    url=base.rstrip('/')+'/search?'+urlencode({'q':term,'format':'jsonv2','limit':8})
+    result=geocode(base,term,os.getenv('GEOCODER_FORMAT','nominatim'))
+    if result is None:return self.send(429,{'error':'Search is busy. Wait two seconds and try again.'},{'Retry-After':'2'})
+    return self.send(200,result)
    else:
     base=os.getenv('ROUTING_URL','')
     if not base:return self.send(503,{'error':'Road routing is awaiting a routing provider.'})

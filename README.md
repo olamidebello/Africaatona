@@ -128,3 +128,11 @@ Deploy with the same single command:
 ```bash
 cd /opt/africaatona-source && git pull --ff-only origin main && ansible-playbook -i localhost, -c local deploy/pull-and-deploy.yml
 ```
+
+## Address search when no geocoder is configured
+
+`pull-and-deploy.yml` now preserves an existing geocoder and otherwise selects Photon (`https://photon.komoot.io`, `GEOCODER_FORMAT=photon`). It snapshots the protected service environment along with application files, restarts the service, and verifies a real Lagos query through the backend. Failed checks restore both application files and configuration. Photon GeoJSON is converted into the existing destination-search response format.
+
+The public Photon service permits reasonable project traffic but can throttle or withdraw access and offers no availability guarantee: https://github.com/komoot/photon#demo-server . This is a low-volume option, not a reserved production capacity allocation. Search is manual, proxied through one application instance, limited to one uncached request per 1.1 seconds across all users, and cached in SQLite for 24 hours with at most 1,000 entries. Concurrent or too-frequent uncached searches receive a retry response rather than queueing extra provider calls. Search addresses are shared with the configured provider; exact address coverage depends on its map data. No query relaxation silently replaces a house address with a city result.
+
+For larger usage, configure your own Photon/Nominatim service or authorized commercial compatible endpoint in `/etc/africaatona.env`, then restart `africaatona`. Use `GEOCODER_FORMAT=photon` for Photon or `GEOCODER_FORMAT=nominatim` for a compatible Nominatim endpoint. The automatic configuration never selects the public Nominatim endpoint. Road routing is configured independently by `ROUTING_URL`; enabling address search alone does not enable turn-by-turn routes.
