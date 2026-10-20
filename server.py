@@ -130,7 +130,7 @@ class Handler(BaseHTTPRequestHandler):
    return self.send(200,result)
   if p.path=='/api/health': return self.send(200,{'ok':True,'application':'AFRICA ATONA'})
   if p.path=='/api/me': return self.send(200,{'user':self.user()})
-  if p.path=='/api/capabilities': return self.send(200,{'routing':bool(os.getenv('ROUTING_URL')),'search':bool(os.getenv('GEOCODER_URL')),'routingVehicles':list(routing_options()[0]),'routingExcludes':routing_options()[1],'liveTraffic':False,'speedLimits':False,'reportKinds':KINDS,'apk':(ROOT/'web/downloads/africa-atona.apk').is_file()})
+  if p.path=='/api/capabilities': return self.send(200,{'routing':bool(os.getenv('ROUTING_URL')),'search':bool(os.getenv('GEOCODER_URL')),'routingRegion':os.getenv('ROUTING_REGION','Configured provider coverage'),'routingVehicles':list(routing_options()[0]),'routingExcludes':routing_options()[1],'liveTraffic':False,'speedLimits':False,'reportKinds':KINDS,'apk':(ROOT/'web/downloads/africa-atona.apk').is_file()})
   if p.path=='/api/reports':
    with db() as c: rows=c.execute('SELECT id,kind,lat,lon,note,created,(SELECT COUNT(*) FROM report_votes v WHERE v.report_id=reports.id AND value=1) confirmations,(SELECT COUNT(*) FROM report_votes v WHERE v.report_id=reports.id AND value=-1) cleared FROM reports WHERE created>? ORDER BY created DESC LIMIT 250',(time.time()-7200,)).fetchall()
    return self.send(200,[dict(x) for x in rows])
@@ -167,7 +167,7 @@ class Handler(BaseHTTPRequestHandler):
     normalized=[]
     for point in points:
      lon,lat=point.split(','); lat,lon=coord(lat,lon); normalized.append(f'{lon},{lat}')
-    url=base.rstrip('/')+'/route/v1/driving/'+';'.join(normalized)+'?overview=full&geometries=geojson&steps=true&alternatives=true'+('&'+urlencode({'exclude':','.join(sorted(set(avoid)))}) if avoid else '')
+    url=base.rstrip('/')+'/route/v1/driving/'+';'.join(normalized)+'?overview=full&geometries=geojson&steps=true&alternatives=true&radiuses='+';'.join(['1000']*len(normalized))+('&'+urlencode({'exclude':','.join(sorted(set(avoid)))}) if avoid else '')
    with LOCK: hit=CACHE.get(url)
    if hit and hit[0]>now:return self.send(200,hit[1])
    result=upstream(url)
@@ -179,7 +179,7 @@ class Handler(BaseHTTPRequestHandler):
   if p.path=='/':target=ROOT/'web/index.html'
   if not target.is_relative_to((ROOT/'web').resolve()) or not target.is_file():return self.send(404,{'error':'Not found'})
   import mimetypes
-  body=target.read_bytes(); self.send_response(200); self.send_header('Content-Type',mimetypes.guess_type(str(target))[0] or 'application/octet-stream'); self.send_header('Content-Length',str(len(body))); self.security(); self.end_headers(); self.wfile.write(body)
+  body=target.read_bytes(); self.send_response(200); self.send_header('Content-Type',mimetypes.guess_type(str(target))[0] or 'application/octet-stream'); self.send_header('Content-Length',str(len(body))); self.send_header('Cache-Control','no-cache'); self.security(); self.end_headers(); self.wfile.write(body)
  def workflow(self,path,b,user,now):
   uid=user['id']
   with db() as c:

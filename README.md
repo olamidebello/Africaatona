@@ -161,3 +161,20 @@ The map screen now labels its destination field and provides a prominent **Go** 
 **Add starting address** enables the second flow: enter source and destination, then Go. This starts route directions from the entered source without requesting GPS or silently replacing that source with the device position. Previous/Next direction buttons advance through those instructions; **Use live GPS** obtains actual position, recalculates from it and enables live guidance. Live tracking still requires location permission and an open app. Current-location mode requests a fresh location rather than reusing an old planning point. **Change journey** reopens the entry form. Repeated Go taps are blocked while a request is in progress. Address lookup busy responses are retried once with a short delay to respect the shared geocoder rate limit.
 
 Both flows require working geocoding and road-routing providers. Configuring search alone does not supply a routing engine. UI interaction has not been visually verified in a browser in the authoring environment.
+
+
+## Fix “Road routing is awaiting a routing provider” for Texas journeys
+
+Address search and road routing are independent. The screenshot's McKinney → Houston journey needs a routing graph covering Texas; the earlier Nigeria provider cannot serve that journey. Run this on the existing hosting server:
+
+```bash
+cd /opt/africaatona-source && git pull --ff-only origin main && ansible-playbook -i localhost, -c local deploy/enable-routing.yml
+```
+
+The playbook preserves any configured routing endpoint. When none is configured, it provisions a separate Texas OSRM engine on `127.0.0.1:5008`, using a Geofabrik Texas extract, two CPU threads and a memory limit. Its preflight requires at least 8 GB total RAM, 6 GB currently available RAM and 32 GiB free disk; these are safety gates, not a guarantee that any particular extract version will fit. Insufficient capacity stops with an actionable error without changing the application. Initial download and preprocessing can take a long time. Repeated runs preserve the pinned image digest and prepared dataset; no implicit data refresh occurs. Container and data state are retained if import fails for diagnosis and resumption. This installation is **Texas-only**, not all-Africa or worldwide routing, and contains no live traffic or motorcycle profile.
+
+The worker verifies a real McKinney → Houston road route before writing `ROUTING_URL` and `ROUTING_REGION`, then the playbook restarts the application and verifies its routing API. It subsequently runs the normal pull-and-deploy checks. Existing service configuration is also saved as `/etc/africaatona.env.before-routing` with root-only permissions. Existing private routing providers are preserved and tested against the same Texas probe. A provider covering only another region will fail that check; it is not silently replaced.
+
+If resources are insufficient or wider coverage is needed, supply `ATONA_ROUTING_URL` in the shell environment for an authorized HTTPS OSRM-compatible provider covering the journey before running the command. Public OSRM demo endpoints are not configured automatically: the project documents them for reasonable non-commercial use, not a reserved production service.
+
+Map assets use a deployment version query and revalidation headers so mobile CSS/JS updates are not silently held by browser caches. Route requests constrain each point's road snapping to 1 km; points outside a regional map fail explicitly rather than snapping to an unrelated distant road.

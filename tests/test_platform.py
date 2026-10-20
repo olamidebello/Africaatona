@@ -144,7 +144,7 @@ class PlatformTests(unittest.TestCase):
  def test_mobile_assets_are_served(self):
   for path,marker in [('/map.html',b'/mobile.js'),('/mobile.js',b'prepareRoute'),('/mobile.css',b'--sheet-height')]:
    c=http.client.HTTPConnection('127.0.0.1',self.http.server_port);c.request('GET',path);response=c.getresponse()
-   self.assertEqual(response.status,200);self.assertIn(marker,response.read());c.close()
+   self.assertEqual(response.status,200);self.assertIn(marker,response.read());self.assertEqual(response.getheader('Cache-Control'),'no-cache');c.close()
  def test_traversal(self):self.assertEqual(self.req('/../server.py')[0],404)
 class DNSTests(unittest.TestCase):
  def test_preserve_zone_and_idempotency(self):

@@ -1,0 +1,64 @@
+---
+- name: Enable a verified road-routing provider for Africa Atona
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Inspect provider configuration and available capacity
+      ansible.builtin.command:
+        argv: [python3, /opt/africaatona-source/deploy/routing_only.py, --inspect]
+      register: routing_state
+      environment:
+        ATONA_ROUTING_URL: "{{ lookup('env','ATONA_ROUTING_URL') }}"
+      changed_when: false
+    - name: Select local routing only when no provider is configured or supplied
+      ansible.builtin.set_fact:
+        needs_local_routing: '{{ not (routing_state.stdout | from_json).configured and not (routing_state.stdout | from_json).external }}'
+    - name: Require enough free capacity for local map import
+      ansible.builtin.assert:
+        that: (routing_state.stdout | from_json).capacity.ready
+        fail_msg: 'Local Texas routing needs 8 GB total RAM, 6 GB currently available RAM and 32 GiB free disk. Free capacity or supply ATONA_ROUTING_URL for a separately hosted OSRM-compatible provider. No application files have been changed.'
+      when: needs_local_routing | bool
+    - name: Install Docker for isolated routing
+      ansible.builtin.apt:
+        name: [docker.io, ca-certificates]
+        state: present
+        update_cache: true
+      when: needs_local_routing | bool
+    - name: Start Docker
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: true
+      when: needs_local_routing | bool
+    - name: Preserve protected service configuration
+      ansible.builtin.copy:
+        src: /etc/africaatona.env
+        dest: /etc/africaatona.env.before-routing
+        remote_src: true
+        force: false
+        mode: '0600'
+      no_log: true
+    - name: Provision routing and validate a McKinney to Houston road route
+      ansible.builtin.command:
+        argv: [python3, /opt/africaatona-source/deploy/routing_only.py]
+      environment:
+        ATONA_ROUTING_URL: "{{ lookup('env','ATONA_ROUTING_URL') }}"
+      async: 14400
+      poll: 15
+      changed_when: true
+    - name: Restart application with routing enabled
+      ansible.builtin.systemd:
+        name: africaatona
+        state: restarted
+    - name: Verify road routing through the application backend
+      ansible.builtin.uri:
+        url: 'http://127.0.0.1:8097/api/route?points=-96.6398,33.1972;-95.3698,29.7604'
+        return_content: true
+        status_code: 200
+      register: routing_check
+      retries: 5
+      delay: 3
+      until: routing_check.status | default(0) == 200
+      failed_when: routing_check.status | default(0) != 200 or routing_check.json.code | default('') != 'Ok' or routing_check.json.routes | default([]) | length == 0
+- import_playbook: pull-and-deploy.yml
