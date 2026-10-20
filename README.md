@@ -141,3 +141,14 @@ For larger usage, configure your own Photon/Nominatim service or authorized comm
 ## African Pidgin language
 
 Settings → Interface language includes **African Pidgin — Nigerian Pidgin (Naija)** (`pcm`) with draft core navigation labels and a translated destination-search placeholder. Existing Nigerian Pidgin selections using the legacy `preference-75` identifier migrate to `pcm` in the interface. The account settings API accepts and restores this choice. Cameroon and Ghanaian Pidgin remain separately listed preferences with English fallback; the Nigerian translation is not presented as a translation of those varieties. Detailed dialogs and route instructions still use English. Spoken output depends on installed device voices; selecting Pidgin does not install or guarantee a Pidgin voice.
+
+
+## Map-first mobile home and route preview
+
+The mobile map now stays behind a draggable bottom sheet. The handle is also a keyboard-operable expand/collapse button. Home includes microphone search, Home/Work/New shortcuts, recent destinations, an opt-in history-based destination suggestion with No/Drive there/info actions, and saved-address navigation for friends and family. No contact imports or inferred travel schedules are used. The microphone starts only after a confirmation; unsupported browsers use typed search.
+
+Route preview shows a back action, origin/destination heading, clickable alternative route lines and map duration labels, road names, distance, estimated arrival, car/motorcycle selector, Avoid options, Leave later (saved planned drive), Go now and route steps. Estimates use the routing provider, without live or typical-traffic claims. Suggestions do not invent a trip time before requesting a route.
+
+The existing car endpoint remains `ROUTING_URL`. To enable motorcycle selection, configure `MOTORCYCLE_ROUTING_URL` with a separate OSRM-compatible service prepared using an appropriate motorcycle road profile. Changing the request profile label alone does not create motorcycle routing. Declare only classes actually supported by your OSRM data via `ROUTING_EXCLUDES=toll,motorway,ferry,unpaved`, and separately `MOTORCYCLE_ROUTING_EXCLUDES` for that provider. OSRM profiles must support the declared classes and exclusion combinations. The backend passes validated selections as OSRM `exclude`; unsupported choices are disabled in the UI and rejected by the API. It never silently substitutes car routing for a motorcycle request. Reference: https://github.com/Project-OSRM/osrm-backend/blob/master/docs/http.md .
+
+These optional environment settings are preserved by the update playbook. Restart `africaatona` after changing provider configuration. The current default provisioning does not install a motorcycle-specific road graph or add traffic data.

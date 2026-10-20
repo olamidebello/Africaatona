@@ -118,6 +118,33 @@ class PlatformTests(unittest.TestCase):
   with server.db() as c:
    self.assertEqual(c.execute("SELECT COUNT(*) FROM history WHERE label='Private'").fetchone()[0],0)
    self.assertEqual(c.execute("SELECT COUNT(*) FROM support_tickets WHERE subject='Private ticket'").fetchone()[0],0)
+ def test_vehicle_provider_selection_and_avoidance_validation(self):
+  previous={key:os.environ.get(key) for key in ('ROUTING_URL','MOTORCYCLE_ROUTING_URL','ROUTING_EXCLUDES','MOTORCYCLE_ROUTING_EXCLUDES')}
+  original=server.upstream;calls=[];server.CACHE.clear()
+  os.environ.update(ROUTING_URL='https://car.example',MOTORCYCLE_ROUTING_URL='https://motorcycle.example',ROUTING_EXCLUDES='toll,motorway',MOTORCYCLE_ROUTING_EXCLUDES='ferry')
+  server.upstream=lambda url:calls.append(url) or {'code':'Ok','routes':[]}
+  try:
+   cap=self.req('/api/capabilities')[2]
+   self.assertEqual(cap['routingVehicles'],['car','motorcycle'])
+   self.assertEqual(self.req('/api/route?points=3,6;4,7&vehicle=motorcycle&avoid=ferry')[0],200)
+   self.assertIn('https://motorcycle.example/route/',calls[-1]);self.assertIn('exclude=ferry',calls[-1])
+   self.assertEqual(self.req('/api/route?points=3,6;4,7&vehicle=car&avoid=toll,motorway')[0],200)
+   self.assertIn('exclude=motorway%2Ctoll',calls[-1])
+   count=len(calls)
+   self.assertEqual(self.req('/api/route?points=3,6;4,7&vehicle=car&avoid=ferry')[0],422)
+   self.assertEqual(len(calls),count)
+   self.assertEqual(self.req('/api/route?points=3,6;4,7&vehicle=plane')[0],400)
+   os.environ.pop('MOTORCYCLE_ROUTING_URL')
+   self.assertEqual(self.req('/api/route?points=3,6;4,7&vehicle=motorcycle')[0],503)
+  finally:
+   server.upstream=original;server.CACHE.clear()
+   for key,value in previous.items():
+    if value is None:os.environ.pop(key,None)
+    else:os.environ[key]=value
+ def test_mobile_assets_are_served(self):
+  for path,marker in [('/map.html',b'/mobile.js'),('/mobile.js',b'prepareRoute'),('/mobile.css',b'--sheet-height')]:
+   c=http.client.HTTPConnection('127.0.0.1',self.http.server_port);c.request('GET',path);response=c.getresponse()
+   self.assertEqual(response.status,200);self.assertIn(marker,response.read());c.close()
  def test_traversal(self):self.assertEqual(self.req('/../server.py')[0],404)
 class DNSTests(unittest.TestCase):
  def test_preserve_zone_and_idempotency(self):

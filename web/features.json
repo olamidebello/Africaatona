@@ -140,9 +140,9 @@
     "resource": "Current toll tariffs, vehicle class and routing integration"
   },
   {
-    "name": "Avoid tolls, ferries, motorways and unpaved roads",
+    "name": "Routing avoidance data and profiles",
     "status": "Requires additional resources or implementation",
-    "resource": "Routing engine profiles supporting each avoidance"
+    "resource": "Operator-provided routing profiles and validated exclusions; controls are listed separately"
   },
   {
     "name": "Motorcycle, taxi and EV routing",
@@ -190,9 +190,9 @@
     "resource": "Explicit device permissions and native integrations"
   },
   {
-    "name": "Voice destination search and hands-free reporting",
+    "name": "Hands-free reporting",
     "status": "Requires additional resources or implementation",
-    "resource": "Speech-recognition support and reviewed voice workflow"
+    "resource": "Reviewed voice-report confirmation workflow; voice destination search is listed separately"
   },
   {
     "name": "Recorded voices and sign-language guidance",
@@ -218,5 +218,45 @@
     "name": "Emergency and crisis-service integrations",
     "status": "Requires additional resources or implementation",
     "resource": "Regional authorized service integrations; support tickets are not emergency dispatch"
+  },
+  {
+    "name": "Map-first mobile home and draggable search sheet",
+    "status": "Implemented",
+    "resource": "Mobile browser; pointer or expand/collapse button"
+  },
+  {
+    "name": "Recent-destination suggestion, dismiss and explanation",
+    "status": "Implemented",
+    "resource": "Signed-in account with opt-in navigation history; no predictive travel model"
+  },
+  {
+    "name": "Route alternatives with clickable map duration labels",
+    "status": "Available when provider is configured",
+    "resource": "Routing provider must return route alternatives and geometry"
+  },
+  {
+    "name": "Car and motorcycle selector",
+    "status": "Implemented; motorcycle requires configured provider",
+    "resource": "ROUTING_URL and separate MOTORCYCLE_ROUTING_URL with appropriate road profiles"
+  },
+  {
+    "name": "Avoid tolls, motorways, ferries and unpaved roads",
+    "status": "Implemented for explicitly configured provider exclusion classes",
+    "resource": "ROUTING_EXCLUDES or MOTORCYCLE_ROUTING_EXCLUDES; unsupported classes are disabled"
+  },
+  {
+    "name": "Voice destination search button",
+    "status": "Implemented on supported browsers",
+    "resource": "Browser SpeechRecognition; user starts microphone; keyboard fallback elsewhere"
+  },
+  {
+    "name": "Leave later and Go now route actions",
+    "status": "Implemented",
+    "resource": "Authenticated planned drives for Leave later; foreground GPS and route provider for Go now"
+  },
+  {
+    "name": "Drive to friends and family",
+    "status": "Implemented using saved destinations",
+    "resource": "Saved addresses; device contacts are not imported"
   }
 ]

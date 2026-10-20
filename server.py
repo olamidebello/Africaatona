@@ -13,6 +13,13 @@ ORIGIN=os.getenv('PUBLIC_URL','https://africaatona.africandroid.world').rstrip('
 KINDS=['Traffic','Police','Crash','Road hazard','Bad weather','Blocked lane','Road closure','Animals','Map issue','Add a place','Gas prices']
 LOCK=threading.Lock(); LIMIT={}; CACHE={}
 SEARCH_LOCK=threading.Lock(); SEARCH_LAST=0.0
+def routing_options():
+ vehicles={k:v for k,v in {'car':os.getenv('ROUTING_URL',''),'motorcycle':os.getenv('MOTORCYCLE_ROUTING_URL','')}.items() if v}
+ excludes={}
+ for vehicle in vehicles:
+  raw=os.getenv('MOTORCYCLE_ROUTING_EXCLUDES' if vehicle=='motorcycle' else 'ROUTING_EXCLUDES','')
+  excludes[vehicle]=[x for x in ('toll','motorway','ferry','unpaved') if x in raw.split(',')]
+ return vehicles,excludes
 def db():
  c=sqlite3.connect(DB); c.row_factory=sqlite3.Row; return c
 def init():
@@ -123,7 +130,7 @@ class Handler(BaseHTTPRequestHandler):
    return self.send(200,result)
   if p.path=='/api/health': return self.send(200,{'ok':True,'application':'AFRICA ATONA'})
   if p.path=='/api/me': return self.send(200,{'user':self.user()})
-  if p.path=='/api/capabilities': return self.send(200,{'routing':bool(os.getenv('ROUTING_URL')),'search':bool(os.getenv('GEOCODER_URL')),'liveTraffic':False,'speedLimits':False,'reportKinds':KINDS,'apk':(ROOT/'web/downloads/africa-atona.apk').is_file()})
+  if p.path=='/api/capabilities': return self.send(200,{'routing':bool(os.getenv('ROUTING_URL')),'search':bool(os.getenv('GEOCODER_URL')),'routingVehicles':list(routing_options()[0]),'routingExcludes':routing_options()[1],'liveTraffic':False,'speedLimits':False,'reportKinds':KINDS,'apk':(ROOT/'web/downloads/africa-atona.apk').is_file()})
   if p.path=='/api/reports':
    with db() as c: rows=c.execute('SELECT id,kind,lat,lon,note,created,(SELECT COUNT(*) FROM report_votes v WHERE v.report_id=reports.id AND value=1) confirmations,(SELECT COUNT(*) FROM report_votes v WHERE v.report_id=reports.id AND value=-1) cleared FROM reports WHERE created>? ORDER BY created DESC LIMIT 250',(time.time()-7200,)).fetchall()
    return self.send(200,[dict(x) for x in rows])
@@ -149,14 +156,18 @@ class Handler(BaseHTTPRequestHandler):
     if result is None:return self.send(429,{'error':'Search is busy. Wait two seconds and try again.'},{'Retry-After':'2'})
     return self.send(200,result)
    else:
-    base=os.getenv('ROUTING_URL','')
-    if not base:return self.send(503,{'error':'Road routing is awaiting a routing provider.'})
+    vehicle=q.get('vehicle',['car'])[0]
+    if vehicle not in ('car','motorcycle'):raise ValueError()
+    providers,excludes=routing_options();base=providers.get(vehicle,'')
+    if not base:return self.send(503,{'error':('Motorcycle routing needs a motorcycle-specific provider.' if vehicle=='motorcycle' else 'Road routing is awaiting a routing provider.')})
+    avoid=[x for x in q.get('avoid',[''])[0].split(',') if x]
+    if any(x not in excludes.get(vehicle,[]) for x in avoid):return self.send(422,{'error':'The routing provider does not support one or more selected road avoidances.'})
     points=q.get('points',[''])[0].split(';')
     if not 2<=len(points)<=4:raise ValueError()
     normalized=[]
     for point in points:
      lon,lat=point.split(','); lat,lon=coord(lat,lon); normalized.append(f'{lon},{lat}')
-    url=base.rstrip('/')+'/route/v1/driving/'+';'.join(normalized)+'?overview=full&geometries=geojson&steps=true&alternatives=true'
+    url=base.rstrip('/')+'/route/v1/driving/'+';'.join(normalized)+'?overview=full&geometries=geojson&steps=true&alternatives=true'+('&'+urlencode({'exclude':','.join(sorted(set(avoid)))}) if avoid else '')
    with LOCK: hit=CACHE.get(url)
    if hit and hit[0]>now:return self.send(200,hit[1])
    result=upstream(url)
