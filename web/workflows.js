@@ -108,9 +108,9 @@ const destinationActions=new MutationObserver(()=>{
 // Record a destination only after navigation is explicitly started and history is enabled.
 const originalStart=start;
 start=async function(index){
-  if(!navigator.geolocation)throw Error('GPS navigation is unavailable on this device.');
+  if(!navigator.geolocation&&state.startMode!=='manual')throw Error('GPS navigation is unavailable on this device.');
   await originalStart(index);
-  if(prefs.historyEnabled && (await api('me')).user) await api('history',{...state.dest}).catch(e=>toast('Navigation started; history not saved: '+e.message));
+  if(prefs.historyEnabled)try{if((await api('me')).user)await api('history',{...state.dest});}catch(e){toast('Navigation started; history not saved: '+e.message);}
 };
 const originalSaved=saved;
 saved=async function(){
@@ -139,7 +139,7 @@ const categoryTools=el('div',undefined,'workflow-nav');
 categoryTools.setAttribute('aria-label','Find places');
 for(const [label,term] of [['Fuel','fuel station'],['Parking','parking'],['Charging','EV charging station'],['Food','restaurant']])btn(label,()=>{
   $('search').value=state.pos?`${term} near ${state.pos.lat.toFixed(3)}, ${state.pos.lon.toFixed(3)}`:term;
-  $('searchForm').requestSubmit();
+  $('search').dispatchEvent(new Event('input'));$('search').focus();
   toast('Place search only; live prices, availability and booking are not connected.');
 },categoryTools);
 $('results').after(categoryTools);

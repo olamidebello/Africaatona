@@ -26,7 +26,7 @@ voice.onclick=()=>{
  btn('Start microphone',()=>{
   $('modal').close();recognition=new Speech();recognition.lang=prefs.ui==='pcm'?'en-NG':({en:'en',fr:'fr',pt:'pt',sw:'sw',yo:'yo',ha:'ha',ar:'ar'}[prefs.ui]||'en');recognition.interimResults=false;recognition.maxAlternatives=1;
   voice.classList.add('listening');voice.setAttribute('aria-label','Stop voice search');
-  recognition.onresult=e=>{const text=e.results?.[0]?.[0]?.transcript;if(text){$('search').value=text;expandSheet();$('searchForm').requestSubmit();}};
+  recognition.onresult=e=>{const text=e.results?.[0]?.[0]?.transcript;if(text){$('search').value=text;$('search').dispatchEvent(new Event('input'));expandSheet();toast('Destination entered. Tap Go to start navigation.');}};
   recognition.onerror=e=>toast('Voice search: '+e.error+'. You can type your destination.');
   recognition.onend=()=>{recognition=null;voice.classList.remove('listening');voice.setAttribute('aria-label','Search by voice');};
   try{recognition.start();}catch(e){recognition=null;voice.classList.remove('listening');toast(e.message);}
@@ -47,6 +47,7 @@ recentSection.after(moreOptions);
 const suggestion=el('section',undefined,'destination-suggestion');suggestion.hidden=true;document.body.append(suggestion);
 let dismissedSuggestion=null;
 async function prepareRoute(destination){
+ state.startMode='gps';
  selectDest(destination);sheet.scrollTop=0;
  if(!state.pos){
   if(!navigator.geolocation)throw Error('GPS is unavailable. Set a starting point in Settings.');

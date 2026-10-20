@@ -258,5 +258,10 @@
     "name": "Drive to friends and family",
     "status": "Implemented using saved destinations",
     "resource": "Saved addresses; device contacts are not imported"
+  },
+  {
+    "name": "Destination → Go and source/destination → Go",
+    "status": "Implemented with configured geocoder and routing provider",
+    "resource": "Current GPS for live guidance; entered-source directions have explicit manual stepping and live-GPS switch"
   }
 ]
