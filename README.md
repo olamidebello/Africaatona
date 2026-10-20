@@ -178,3 +178,10 @@ The worker verifies a real McKinney → Houston road route before writing `ROUTI
 If resources are insufficient or wider coverage is needed, supply `ATONA_ROUTING_URL` in the shell environment for an authorized HTTPS OSRM-compatible provider covering the journey before running the command. Public OSRM demo endpoints are not configured automatically: the project documents them for reasonable non-commercial use, not a reserved production service.
 
 Map assets use a deployment version query and revalidation headers so mobile CSS/JS updates are not silently held by browser caches. Route requests constrain each point's road snapping to 1 km; points outside a regional map fail explicitly rather than snapping to an unrelated distant road.
+
+
+## Street-address matching and editable lookup
+
+For a numbered street address, Go filters out search results that do not match the street name and type, rejects a conflicting returned house number, and checks any supplied city/region/postcode tokens. Common street suffixes and TX/OH/CA abbreviations are normalized. This is a conservative match check, not a worldwide address-verification service; unrecognized formats require explicit selection. A street-only result is labelled approximate and requires confirmation rather than being silently treated as the requested house. No city or home address is guessed from account data.
+
+Address fields remain editable while lookup is in progress. Choosing among results changes the button to Choose address and explains what is needed. Edit/Cancel controls are above the results; changing an input cancels pending selection and blocks stale results from starting navigation. If no credible match is returned, enter the full address with city, state/region and postcode, or use a map point. The provider may not contain every house number.

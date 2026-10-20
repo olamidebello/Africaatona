@@ -28,3 +28,25 @@ test('location denial does not route or start',async()=>{
  await assert.rejects(journey.begin({destinationText:'Destination',resolve:async()=>destination,locate:async()=>{throw Error('Location denied')},route:async()=>{routed=true}}),/Location denied/);
  assert.equal(routed,false);
 });
+test('numbered street query rejects unrelated global Dublin suggestions',()=>{
+ const results=['CSCC Dublin Regional Learning Center, 6190 Shamrock Court, Dublin, OH','Dublin, Ohio, 43016, United States','Green Street Court House, Dublin, Ireland','Dublin Airport, Dublin, Ireland'].map(display_name=>({display_name,lat:1,lon:2}));
+ assert.deepEqual(journey.addressMatches('2105 Dublin Court',results),[]);
+});
+test('street abbreviation matches but wrong house numbers do not',()=>{
+ const matches=journey.addressMatches('2105 Dublin Ct, McKinney TX',[{display_name:'2105 Dublin Court, McKinney, Texas',lat:1,lon:2},{display_name:'2107 Dublin Court, McKinney, Texas',lat:1,lon:2}]);
+ assert.equal(matches.length,1);assert.equal(matches[0].addressAccuracy,'address');
+});
+test('street-only match is marked approximate rather than a verified house',()=>{
+ const matches=journey.addressMatches('2105 Dublin Court',[{display_name:'Dublin Court, McKinney, Texas, 75071',lat:1,lon:2}]);
+ assert.equal(matches[0].addressAccuracy,'street');
+});
+test('non-numbered place searches remain selectable',()=>{
+ assert.equal(journey.addressMatches('Lagos',[{display_name:'Lagos, Nigeria',lat:6,lon:3}])[0].addressAccuracy,'place');
+});
+
+test('supplied city and postcode reject the same street in another location',()=>{
+ const matches=journey.addressMatches('2105 Dublin Ct, McKinney TX 75071',[
+ {display_name:'2105 Dublin Court, Springfield, Texas, 77001',lat:1,lon:2},
+ {display_name:'2105 Dublin Court, McKinney, Texas, 75071',lat:1,lon:2}]);
+ assert.equal(matches.length,1);assert.match(matches[0].display_name,/McKinney/);
+});
